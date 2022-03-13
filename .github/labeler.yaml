@@ -1,0 +1,11 @@
+# Modules
+":floppy_disk: org-organization":
+- modules/org-organization/**/*
+":floppy_disk: org-team":
+- modules/org-team/**/*
+":floppy_disk: project":
+- modules/project/**/*
+":floppy_disk: repository":
+- modules/repository/**/*
+":floppy_disk: webhook":
+- modules/webhook/**/*
