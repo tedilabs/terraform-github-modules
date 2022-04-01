@@ -11,7 +11,7 @@ This module creates following resources.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1 |
-| <a name="requirement_github"></a> [github](#requirement\_github) | = 4.13.0 |
+| <a name="requirement_github"></a> [github](#requirement\_github) | >= 4.13.0 |
 
 ## Providers
 
@@ -27,8 +27,8 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [github_organization_webhook.this](https://registry.terraform.io/providers/hashicorp/github/4.13.0/docs/resources/organization_webhook) | resource |
-| [github_repository_webhook.this](https://registry.terraform.io/providers/hashicorp/github/4.13.0/docs/resources/repository_webhook) | resource |
+| [github_organization_webhook.this](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/organization_webhook) | resource |
+| [github_repository_webhook.this](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/repository_webhook) | resource |
 
 ## Inputs
 

@@ -15,7 +15,7 @@ This module creates following resources.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1 |
-| <a name="requirement_github"></a> [github](#requirement\_github) | = 4.13.0 |
+| <a name="requirement_github"></a> [github](#requirement\_github) | >= 4.13.0 |
 
 ## Providers
 
@@ -31,12 +31,12 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [github_branch_default.this](https://registry.terraform.io/providers/hashicorp/github/4.13.0/docs/resources/branch_default) | resource |
-| [github_issue_label.this](https://registry.terraform.io/providers/hashicorp/github/4.13.0/docs/resources/issue_label) | resource |
-| [github_repository.this](https://registry.terraform.io/providers/hashicorp/github/4.13.0/docs/resources/repository) | resource |
-| [github_repository_collaborator.this](https://registry.terraform.io/providers/hashicorp/github/4.13.0/docs/resources/repository_collaborator) | resource |
-| [github_repository_deploy_key.this](https://registry.terraform.io/providers/hashicorp/github/4.13.0/docs/resources/repository_deploy_key) | resource |
-| [github_team_repository.this](https://registry.terraform.io/providers/hashicorp/github/4.13.0/docs/resources/team_repository) | resource |
+| [github_branch_default.this](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/branch_default) | resource |
+| [github_issue_label.this](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/issue_label) | resource |
+| [github_repository.this](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/repository) | resource |
+| [github_repository_collaborator.this](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/repository_collaborator) | resource |
+| [github_repository_deploy_key.this](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/repository_deploy_key) | resource |
+| [github_team_repository.this](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/team_repository) | resource |
 
 ## Inputs
 
