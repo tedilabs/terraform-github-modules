@@ -31,6 +31,7 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [github_branch.this](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/branch) | resource |
 | [github_branch_default.this](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/branch_default) | resource |
 | [github_issue_label.this](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/issue_label) | resource |
 | [github_repository.this](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/repository) | resource |
@@ -47,6 +48,7 @@ No modules.
 | <a name="input_admin_teams"></a> [admin\_teams](#input\_admin\_teams) | (Optional) A list of teams with `admin` permission to the repository. You can use GitHub team id or the GitHub team slug. | `set(string)` | `[]` | no |
 | <a name="input_archive_on_destroy"></a> [archive\_on\_destroy](#input\_archive\_on\_destroy) | (Optional) Set to `true` to archive the repository instead of deleting on destroy. | `bool` | `false` | no |
 | <a name="input_archived"></a> [archived](#input\_archived) | (Optional) Specify if the repository should be archived. Defaults to `false`. NOTE: Currently, the API does not support unarchiving. | `bool` | `false` | no |
+| <a name="input_branches"></a> [branches](#input\_branches) | (Optional) A list of branches to create and manage within the repository. | `set(string)` | `[]` | no |
 | <a name="input_default_branch"></a> [default\_branch](#input\_default\_branch) | (Optional) Set the default branch for the repository. Default is `main` branch. | `string` | `"main"` | no |
 | <a name="input_delete_branch_on_merge"></a> [delete\_branch\_on\_merge](#input\_delete\_branch\_on\_merge) | (Optional) Automatically delete head branch after a pull request is merged. Defaults to true. | `bool` | `true` | no |
 | <a name="input_deploy_keys"></a> [deploy\_keys](#input\_deploy\_keys) | (Optional) A list of deploy keys to grant access to the repository. A deploy key is a SSH key. Each member of `deploy_keys` block as defined below.<br>    (Required) `name` - A name of deploy key.<br>    (Optional) `key` - A SSH key. Begins with 'ssh-rsa', 'ecdsa-sha2-nistp256', 'ecdsa-sha2-nistp384', 'ecdsa-sha2-nistp521', 'ssh-ed25519', 'sk-ecdsa-sha2-nistp256@openssh.com', or 'sk-ssh-ed25519@openssh.com'.<br>    (Optional) `writable` - Whether to allow write access to the repository. The key can be used to push to the repository if enabled. | <pre>list(object({<br>    name     = string<br>    key      = string<br>    writable = bool<br>  }))</pre> | `[]` | no |
@@ -58,6 +60,10 @@ No modules.
 | <a name="input_maintain_collaborators"></a> [maintain\_collaborators](#input\_maintain\_collaborators) | (Optional) A list of users as collaborator with `maintain` permission to the repository. You can use GitHub username. | `set(string)` | `[]` | no |
 | <a name="input_maintain_teams"></a> [maintain\_teams](#input\_maintain\_teams) | (Optional) A list of teams with `maintain` permission to the repository. You can use GitHub team id or the GitHub team slug. | `set(string)` | `[]` | no |
 | <a name="input_merge_strategies"></a> [merge\_strategies](#input\_merge\_strategies) | (Optional) A list of allowed strategies for merging pull requests on the repository. Available strategies: `MERGE_COMMIT`, `SQUASH`, `REBASE`. | `set(string)` | <pre>[<br>  "SQUASH",<br>  "REBASE"<br>]</pre> | no |
+| <a name="input_pages_cname"></a> [pages\_cname](#input\_pages\_cname) | (Optional) The custom domain for the repository. This can only be set after the repository has been created. | `string` | `null` | no |
+| <a name="input_pages_enabled"></a> [pages\_enabled](#input\_pages\_enabled) | (Optional) Set to true to enable GitHub Pages for the repository. GitHub Pages is designed to host your personal, organization, or project pages from a GitHub repository. | `bool` | `false` | no |
+| <a name="input_pages_source_branch"></a> [pages\_source\_branch](#input\_pages\_source\_branch) | (Optional) The repository branch used to publish the site's source files. Defaults to `gh-pages` branch. | `string` | `"gh-pages"` | no |
+| <a name="input_pages_source_path"></a> [pages\_source\_path](#input\_pages\_source\_path) | (Optional) The repository directory path from which the site publishes. Defaults to `/`. | `string` | `"/"` | no |
 | <a name="input_read_collaborators"></a> [read\_collaborators](#input\_read\_collaborators) | (Optional) A list of users as collaborator with `read` permission to the repository. You can use GitHub username. | `set(string)` | `[]` | no |
 | <a name="input_read_teams"></a> [read\_teams](#input\_read\_teams) | (Optional) A list of teams with `read` permission to the repository. You can use GitHub team id or the GitHub team slug. | `set(string)` | `[]` | no |
 | <a name="input_template"></a> [template](#input\_template) | (Optional) Use a template repository, license or gitignore to create the repository.this resource. `template` block as defined below.<br>    (Optional) `gitignore` - Choose which files not to track from a list of templates. Use the name of the template without the extension. For example, `Haskell`.<br>    (Optional) `init_readme` - Set to `true` to produce an initial commit with README.md in the repository.<br>    (Optional) `license` - A license tells others what they can and can't do with your code. Use the name of the license template without the extension. For example, `mit` or `mpl-2.0`.<br>    (Optional) `repository` - Start this repository with a template repository's contents. The full name of the repository is required. A string of the form `owner/repository`. | `any` | `{}` | no |
@@ -65,6 +71,7 @@ No modules.
 | <a name="input_triage_collaborators"></a> [triage\_collaborators](#input\_triage\_collaborators) | (Optional) A list of users as collaborator with `triage` permission to the repository. You can use GitHub username. | `set(string)` | `[]` | no |
 | <a name="input_triage_teams"></a> [triage\_teams](#input\_triage\_teams) | (Optional) A list of teams with `triage` permission to the repository. You can use GitHub team id or the GitHub team slug. | `set(string)` | `[]` | no |
 | <a name="input_visibility"></a> [visibility](#input\_visibility) | (Optional) Can be `public`, `private` or `internal`. `internal` visibility is only available if your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. | `string` | `"private"` | no |
+| <a name="input_vulnerability_alerts"></a> [vulnerability\_alerts](#input\_vulnerability\_alerts) | (Optional) Set to true to enable security alerts for vulnerable dependencies. Enabling requires alerts to be enabled on the owner level. GitHub enables the alerts on public repos but disables them on private repos by default. | `bool` | `false` | no |
 | <a name="input_write_collaborators"></a> [write\_collaborators](#input\_write\_collaborators) | (Optional) A list of users as collaborator with `write` permission to the repository. You can use GitHub username. | `set(string)` | `[]` | no |
 | <a name="input_write_teams"></a> [write\_teams](#input\_write\_teams) | (Optional) A list of teams with `write` permission to the repository. You can use GitHub team id or the GitHub team slug. | `set(string)` | `[]` | no |
 
@@ -73,6 +80,7 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_archived"></a> [archived](#output\_archived) | Whether the repository is archived. |
+| <a name="output_branches"></a> [branches](#output\_branches) | A list of the repository branches excluding initial branch. |
 | <a name="output_default_branch"></a> [default\_branch](#output\_default\_branch) | The default branch of the repository. |
 | <a name="output_delete_branch_on_merge"></a> [delete\_branch\_on\_merge](#output\_delete\_branch\_on\_merge) | Automatically delete head branch after a pull request is merged. |
 | <a name="output_deploy_keys"></a> [deploy\_keys](#output\_deploy\_keys) | A list of deploy keys granted access to the repository. |
@@ -88,10 +96,12 @@ No modules.
 | <a name="output_merge_strategies"></a> [merge\_strategies](#output\_merge\_strategies) | A list of available strategies for merging pull requests on the repository. |
 | <a name="output_name"></a> [name](#output\_name) | The name of the repository. |
 | <a name="output_node_id"></a> [node\_id](#output\_node\_id) | The node ID of the GitHub repository. This is GraphQL global node id for use with v4 API. |
+| <a name="output_pages"></a> [pages](#output\_pages) | The repository's GitHub Pages configuration. |
 | <a name="output_permissions"></a> [permissions](#output\_permissions) | The access control list which manage individual and team access to the repository. |
 | <a name="output_ssh_clone_url"></a> [ssh\_clone\_url](#output\_ssh\_clone\_url) | The URL that can be provided to `git clone` to clone the repository anonymously via SSH. |
 | <a name="output_template"></a> [template](#output\_template) | The template of the repository. |
 | <a name="output_topics"></a> [topics](#output\_topics) | A list of topics for the repository. |
 | <a name="output_url"></a> [url](#output\_url) | The URL of the repository. |
 | <a name="output_visibility"></a> [visibility](#output\_visibility) | The visibility of the repository. Can be `public`, `private` or `internal`. |
+| <a name="output_vulnerability_alerts"></a> [vulnerability\_alerts](#output\_vulnerability\_alerts) | Whether the security alerts are enabled for vulnerable dpendencies. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

@@ -125,9 +125,19 @@ output "permissions" {
   }
 }
 
+output "branches" {
+  description = "A list of the repository branches excluding initial branch."
+  value       = var.branches
+}
+
 output "default_branch" {
   description = "The default branch of the repository."
   value       = one(github_branch_default.this.*.branch)
+}
+
+output "vulnerability_alerts" {
+  description = "Whether the security alerts are enabled for vulnerable dpendencies."
+  value       = github_repository.this.vulnerability_alerts
 }
 
 output "deploy_keys" {
@@ -135,5 +145,17 @@ output "deploy_keys" {
   value = {
     for key in var.deploy_keys :
     key.name => key
+  }
+}
+
+output "pages" {
+  description = "The repository's GitHub Pages configuration."
+  value = {
+    eanbled = var.pages_enabled
+    cname   = var.pages_cname
+    source = {
+      branch = var.pages_source_branch
+      path   = var.pages_source_path
+    }
   }
 }
