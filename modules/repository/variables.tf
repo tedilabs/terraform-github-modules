@@ -164,10 +164,22 @@ variable "admin_collaborators" {
   default     = []
 }
 
+variable "branches" {
+  description = "(Optional) A list of branches to create and manage within the repository."
+  type        = set(string)
+  default     = []
+}
+
 variable "default_branch" {
   description = "(Optional) Set the default branch for the repository. Default is `main` branch."
   type        = string
   default     = "main"
+}
+
+variable "vulnerability_alerts" {
+  description = "(Optional) Set to true to enable security alerts for vulnerable dependencies. Enabling requires alerts to be enabled on the owner level. GitHub enables the alerts on public repos but disables them on private repos by default."
+  type        = bool
+  default     = false
 }
 
 variable "deploy_keys" {
@@ -183,4 +195,28 @@ variable "deploy_keys" {
     writable = bool
   }))
   default = []
+}
+
+variable "pages_enabled" {
+  description = "(Optional) Set to true to enable GitHub Pages for the repository. GitHub Pages is designed to host your personal, organization, or project pages from a GitHub repository."
+  type        = bool
+  default     = false
+}
+
+variable "pages_source_branch" {
+  description = "(Optional) The repository branch used to publish the site's source files. Defaults to `gh-pages` branch."
+  type        = string
+  default     = "gh-pages"
+}
+
+variable "pages_source_path" {
+  description = "(Optional) The repository directory path from which the site publishes. Defaults to `/`."
+  type        = string
+  default     = "/"
+}
+
+variable "pages_cname" {
+  description = "(Optional) The custom domain for the repository. This can only be set after the repository has been created."
+  type        = string
+  default     = null
 }

@@ -30,8 +30,21 @@ resource "github_repository" "this" {
   allow_rebase_merge = contains(var.merge_strategies, "REBASE")
 
   delete_branch_on_merge = var.delete_branch_on_merge
+  vulnerability_alerts   = var.vulnerability_alerts
 
   topics = var.topics
+
+  dynamic "pages" {
+    for_each = var.pages_enabled ? ["go"] : []
+
+    content {
+      source {
+        branch = var.pages_source_branch
+        path   = var.pages_source_path
+      }
+      cname = try(var.pages_cname, null)
+    }
+  }
 
   lifecycle {
     ignore_changes = [
@@ -41,11 +54,4 @@ resource "github_repository" "this" {
       template,
     ]
   }
-}
-
-resource "github_branch_default" "this" {
-  count = var.default_branch != null ? 1 : 0
-
-  repository = github_repository.this.name
-  branch     = var.default_branch
 }
