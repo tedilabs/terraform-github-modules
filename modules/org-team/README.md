@@ -10,14 +10,14 @@ This module creates following resources.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1 |
-| <a name="requirement_github"></a> [github](#requirement\_github) | >= 4.13.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5 |
+| <a name="requirement_github"></a> [github](#requirement\_github) | >= 5.8 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_github"></a> [github](#provider\_github) | 4.13.0 |
+| <a name="provider_github"></a> [github](#provider\_github) | 5.39.0 |
 
 ## Modules
 
@@ -27,8 +27,8 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [github_team.this](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/team) | resource |
-| [github_team_membership.this](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/team_membership) | resource |
+| [github_team.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team) | resource |
+| [github_team_membership.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_membership) | resource |
 
 ## Inputs
 

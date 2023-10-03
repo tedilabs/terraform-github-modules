@@ -10,14 +10,14 @@ This module creates following resources.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1 |
-| <a name="requirement_github"></a> [github](#requirement\_github) | >= 4.13.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5 |
+| <a name="requirement_github"></a> [github](#requirement\_github) | >= 5.8 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_github"></a> [github](#provider\_github) | 4.13.0 |
+| <a name="provider_github"></a> [github](#provider\_github) | 5.39.0 |
 
 ## Modules
 
@@ -27,10 +27,10 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [github_membership.this](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/membership) | resource |
-| [github_organization_block.this](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/organization_block) | resource |
-| [github_organization.after](https://registry.terraform.io/providers/hashicorp/github/latest/docs/data-sources/organization) | data source |
-| [github_organization.this](https://registry.terraform.io/providers/hashicorp/github/latest/docs/data-sources/organization) | data source |
+| [github_membership.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/membership) | resource |
+| [github_organization_block.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/organization_block) | resource |
+| [github_organization.after](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/organization) | data source |
+| [github_organization.this](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/organization) | data source |
 
 ## Inputs
 
