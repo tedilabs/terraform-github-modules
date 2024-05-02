@@ -1,6 +1,16 @@
 version: 2
 updates:
-- package-ecosystem: "github-actions"
-  directory: "/"
+- package-ecosystem: github-actions
+  directory: /
   schedule:
-    interval: "daily"
+    interval: daily
+
+- package-ecosystem: terraform
+  directories:
+  - /modules/org-organization
+  - /modules/org-team
+  - /modules/project
+  - /modules/repository
+  - /modules/webhook
+  schedule:
+    interval: weekly
