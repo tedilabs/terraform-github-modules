@@ -1,11 +1,25 @@
 # Modules
 ":floppy_disk: org-organization":
-- modules/org-organization/**/*
+- changed-files:
+  - any-glob-to-any-file:
+    - modules/org-organization/**/*
+
 ":floppy_disk: org-team":
-- modules/org-team/**/*
+- changed-files:
+  - any-glob-to-any-file:
+    - modules/org-team/**/*
+
 ":floppy_disk: project":
-- modules/project/**/*
+- changed-files:
+  - any-glob-to-any-file:
+    - modules/project/**/*
+
 ":floppy_disk: repository":
-- modules/repository/**/*
+- changed-files:
+  - any-glob-to-any-file:
+    - modules/repository/**/*
+
 ":floppy_disk: webhook":
-- modules/webhook/**/*
+- changed-files:
+  - any-glob-to-any-file:
+    - modules/webhook/**/*
