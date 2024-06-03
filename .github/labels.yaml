@@ -41,6 +41,9 @@
 
 # Modules
 - color: "fbca04"
+  description: "This issue or pull request is related to enterprise-organization module."
+  name: ":floppy_disk: enterprise-organization"
+- color: "fbca04"
   description: "This issue or pull request is related to org-organization module."
   name: ":floppy_disk: org-organization"
 - color: "fbca04"

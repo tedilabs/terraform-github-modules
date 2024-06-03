@@ -1,4 +1,9 @@
 # Modules
+":floppy_disk: enterprise-organization":
+- changed-files:
+  - any-glob-to-any-file:
+    - modules/enterprise-organization/**/*
+
 ":floppy_disk: org-organization":
 - changed-files:
   - any-glob-to-any-file:
