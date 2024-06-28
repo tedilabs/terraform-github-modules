@@ -15,7 +15,7 @@ This module creates following resources.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.8 |
-| <a name="requirement_github"></a> [github](#requirement\_github) | >= 5.8 |
+| <a name="requirement_github"></a> [github](#requirement\_github) | >= 6.2 |
 
 ## Providers
 
@@ -51,7 +51,7 @@ No modules.
 | <a name="input_branches"></a> [branches](#input\_branches) | (Optional) A list of branches to create and manage within the repository. | `set(string)` | `[]` | no |
 | <a name="input_default_branch"></a> [default\_branch](#input\_default\_branch) | (Optional) Set the default branch for the repository. Default is `main` branch. | `string` | `"main"` | no |
 | <a name="input_delete_branch_on_merge"></a> [delete\_branch\_on\_merge](#input\_delete\_branch\_on\_merge) | (Optional) Automatically delete head branch after a pull request is merged. Defaults to true. | `bool` | `true` | no |
-| <a name="input_deploy_keys"></a> [deploy\_keys](#input\_deploy\_keys) | (Optional) A list of deploy keys to grant access to the repository. A deploy key is a SSH key. Each member of `deploy_keys` block as defined below.<br>    (Required) `name` - A name of deploy key.<br>    (Optional) `key` - A SSH key. Begins with 'ssh-rsa', 'ecdsa-sha2-nistp256', 'ecdsa-sha2-nistp384', 'ecdsa-sha2-nistp521', 'ssh-ed25519', 'sk-ecdsa-sha2-nistp256@openssh.com', or 'sk-ssh-ed25519@openssh.com'.<br>    (Optional) `writable` - Whether to allow write access to the repository. The key can be used to push to the repository if enabled. | <pre>list(object({<br>    name     = string<br>    key      = string<br>    writable = bool<br>  }))</pre> | `[]` | no |
+| <a name="input_deploy_keys"></a> [deploy\_keys](#input\_deploy\_keys) | (Optional) A list of deploy keys to grant access to the repository. A deploy key is a SSH key. Each item of `deploy_keys` block as defined below.<br>    (Optional) `name` - A name of deploy key.<br>    (Required) `key` - A SSH key. Begins with 'ssh-rsa', 'ecdsa-sha2-nistp256', 'ecdsa-sha2-nistp384', 'ecdsa-sha2-nistp521', 'ssh-ed25519', 'sk-ecdsa-sha2-nistp256@openssh.com', or 'sk-ssh-ed25519@openssh.com'.<br>    (Optional) `writable` - Whether to allow write access to the repository. The key can be used to push to the repository if enabled. Defaults to `false`. | <pre>list(object({<br>    name     = optional(string)<br>    key      = string<br>    writable = optional(bool, false)<br>  }))</pre> | `[]` | no |
 | <a name="input_description"></a> [description](#input\_description) | (Optional) A description of the repository. | `string` | `"Managed by Terraform."` | no |
 | <a name="input_features"></a> [features](#input\_features) | (Optional) A list of enabled features on the repository. Available features: `ISSUES`, `PROJECTS`, `WIKI`. | `set(string)` | <pre>[<br>  "ISSUES"<br>]</pre> | no |
 | <a name="input_homepage"></a> [homepage](#input\_homepage) | (Optional) A URL of website describing the repository. | `string` | `null` | no |
@@ -83,7 +83,7 @@ No modules.
 | <a name="output_branches"></a> [branches](#output\_branches) | A list of the repository branches excluding initial branch. |
 | <a name="output_default_branch"></a> [default\_branch](#output\_default\_branch) | The default branch of the repository. |
 | <a name="output_delete_branch_on_merge"></a> [delete\_branch\_on\_merge](#output\_delete\_branch\_on\_merge) | Automatically delete head branch after a pull request is merged. |
-| <a name="output_deploy_keys"></a> [deploy\_keys](#output\_deploy\_keys) | A list of deploy keys granted access to the repository. |
+| <a name="output_deploy_keys"></a> [deploy\_keys](#output\_deploy\_keys) | A map of deploy keys granted access to the repository. |
 | <a name="output_description"></a> [description](#output\_description) | The description of the repository. |
 | <a name="output_features"></a> [features](#output\_features) | A list of available features on the repository. |
 | <a name="output_full_name"></a> [full\_name](#output\_full\_name) | The full name of the repository. A string of the form `orgname/reponame` |

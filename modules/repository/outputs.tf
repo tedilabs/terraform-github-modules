@@ -141,10 +141,14 @@ output "vulnerability_alerts" {
 }
 
 output "deploy_keys" {
-  description = "A list of deploy keys granted access to the repository."
+  description = "A map of deploy keys granted access to the repository."
   value = {
-    for key in var.deploy_keys :
-    key.name => key
+    for name, deploy_key in github_repository_deploy_key.this :
+    name => {
+      name     = name
+      key      = deploy_key.key
+      writable = !deploy_key.read_only
+    }
   }
 }
 

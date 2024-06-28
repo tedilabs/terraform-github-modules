@@ -184,17 +184,18 @@ variable "vulnerability_alerts" {
 
 variable "deploy_keys" {
   description = <<EOF
-  (Optional) A list of deploy keys to grant access to the repository. A deploy key is a SSH key. Each member of `deploy_keys` block as defined below.
-    (Required) `name` - A name of deploy key.
-    (Optional) `key` - A SSH key. Begins with 'ssh-rsa', 'ecdsa-sha2-nistp256', 'ecdsa-sha2-nistp384', 'ecdsa-sha2-nistp521', 'ssh-ed25519', 'sk-ecdsa-sha2-nistp256@openssh.com', or 'sk-ssh-ed25519@openssh.com'.
-    (Optional) `writable` - Whether to allow write access to the repository. The key can be used to push to the repository if enabled.
+  (Optional) A list of deploy keys to grant access to the repository. A deploy key is a SSH key. Each item of `deploy_keys` block as defined below.
+    (Optional) `name` - A name of deploy key.
+    (Required) `key` - A SSH key. Begins with 'ssh-rsa', 'ecdsa-sha2-nistp256', 'ecdsa-sha2-nistp384', 'ecdsa-sha2-nistp521', 'ssh-ed25519', 'sk-ecdsa-sha2-nistp256@openssh.com', or 'sk-ssh-ed25519@openssh.com'.
+    (Optional) `writable` - Whether to allow write access to the repository. The key can be used to push to the repository if enabled. Defaults to `false`.
   EOF
   type = list(object({
-    name     = string
+    name     = optional(string)
     key      = string
-    writable = bool
+    writable = optional(bool, false)
   }))
-  default = []
+  default  = []
+  nullable = false
 }
 
 variable "pages_enabled" {

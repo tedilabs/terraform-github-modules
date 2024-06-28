@@ -4,12 +4,12 @@
 
 resource "github_repository_deploy_key" "this" {
   for_each = {
-    for key in var.deploy_keys :
-    key.name => key
+    for deploy_key in var.deploy_keys :
+    coalesce(deploy_key.name, md5(deploy_key.key)) => deploy_key
   }
 
   repository = github_repository.this.name
-  title      = try(each.key, md5(each.value.key))
+  title      = each.key
   key        = each.value.key
-  read_only  = try(!each.value.writable, true)
+  read_only  = !each.value.writable
 }
