@@ -7,10 +7,6 @@ updates:
 
 - package-ecosystem: terraform
   directories:
-  - /modules/org-organization
-  - /modules/org-team
-  - /modules/project
-  - /modules/repository
-  - /modules/webhook
+  - /modules/*
   schedule:
     interval: weekly
