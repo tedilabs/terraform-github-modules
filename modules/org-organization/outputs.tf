@@ -25,17 +25,25 @@ output "plan" {
 
 output "owners" {
   description = "A list of the owners of the organization."
-  value       = var.owners
+  value = [
+    for user in data.github_organization.after.users :
+    user.login
+    if user.role == "ADMIN"
+  ]
 }
 
 output "members" {
   description = "A list of the members of the organization."
-  value       = var.members
+  value = [
+    for user in data.github_organization.after.users :
+    user.login
+    if user.role == "MEMBER"
+  ]
 }
 
-output "all_members" {
+output "users" {
   description = "A list of all members of the organization."
-  value       = data.github_organization.after.members
+  value       = data.github_organization.after.users
 }
 
 output "repositories" {
@@ -46,4 +54,9 @@ output "repositories" {
 output "blocked_users" {
   description = "A list of blocked usernames from organization."
   value       = var.blocked_users
+}
+
+output "security_manager_teams" {
+  description = "A list of team slugs to add as security manager teams."
+  value       = keys(github_organization_security_manager.this)
 }

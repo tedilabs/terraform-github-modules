@@ -51,3 +51,14 @@ resource "github_organization_block" "this" {
 
   username = each.key
 }
+
+
+###################################################
+# Seucrity Manager Teams for GitHub Organization
+###################################################
+
+resource "github_organization_security_manager" "this" {
+  for_each = toset(var.security_manager_teams)
+
+  team_slug = each.key
+}
