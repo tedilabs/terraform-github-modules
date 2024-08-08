@@ -35,9 +35,9 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_name"></a> [name](#input\_name) | (Required) The name of the team. | `string` | n/a | yes |
-| <a name="input_default_maintainer_enabled"></a> [default\_maintainer\_enabled](#input\_default\_maintainer\_enabled) | (Optional) If true, adds the creating user as a default maintainer to the team. | `bool` | `false` | no |
+| <a name="input_default_maintainer_enabled"></a> [default\_maintainer\_enabled](#input\_default\_maintainer\_enabled) | (Optional) If true, adds the creating user as a default maintainer to the team. Defaults to `false`. | `bool` | `false` | no |
 | <a name="input_description"></a> [description](#input\_description) | (Optional) A description of the team. | `string` | `"Managed by Terraform."` | no |
-| <a name="input_is_secret"></a> [is\_secret](#input\_is\_secret) | (Optional) If true, team is only visible to the people on the team and people with owner permissions. | `bool` | `false` | no |
+| <a name="input_is_secret"></a> [is\_secret](#input\_is\_secret) | (Optional) If true, team is only visible to the people on the team and people with owner permissions. Defaults to `false`. | `bool` | `false` | no |
 | <a name="input_ldap_group_dn"></a> [ldap\_group\_dn](#input\_ldap\_group\_dn) | (Optional) The LDAP Distinguished Name of the group where membership will be synchronized. Only available in GitHub Enterprise Server. | `string` | `null` | no |
 | <a name="input_maintainers"></a> [maintainers](#input\_maintainers) | (Optional) A list of usernames to add users as `maintainer` role. When applied, the user will become a maintainer of the team. | `set(string)` | `[]` | no |
 | <a name="input_members"></a> [members](#input\_members) | (Optional) A list of usernames to add users as `member` role. When applied, the user will become a member of the team. | `set(string)` | `[]` | no |
