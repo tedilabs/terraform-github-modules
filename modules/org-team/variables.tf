@@ -57,3 +57,34 @@ variable "members" {
   default     = []
   nullable    = false
 }
+
+variable "code_review_auto_assignment" {
+  description = <<EOT
+  (Optional) A configuration for code review auto assignment. `code_review_auto_assignment` block as defined below.
+    (Optional) `enabled` - Whether to enable code review auto assignment. Defaults to `false`.
+    (Optional) `algorithm` - The algorithm to use for code review auto assignment. Valid values are `ROUND_ROBIN` or `LOAD_BALANCE`. Defaults to `ROUND_ROBIN`.
+    (Optional) `assignment_count` - The number of reviewers to assign for each pull request.
+    (Optional) `notify_team_enabled` - Whether to notify the entire team when both a team and one or more of its members are requested for review. Defaults to `false`.
+  EOT
+  type = object({
+    enabled          = optional(bool, false)
+    algorithm        = optional(string, "ROUND_ROBIN")
+    assignment_count = optional(number)
+
+    notify_team_enabled = optional(bool, false)
+  })
+  default  = {}
+  nullable = false
+
+  validation {
+    condition     = contains(["ROUND_ROBIN", "LOAD_BALANCE"], var.code_review_auto_assignment.algorithm)
+    error_message = "Valid values of `algorithm` are `ROUND_ROBIN` or `LOAD_BALANCE`."
+  }
+  validation {
+    condition = anytrue([
+      var.code_review_auto_assignment.enabled == false,
+      var.code_review_auto_assignment.enabled == true && var.code_review_auto_assignment.assignment_count != 0
+    ])
+    error_message = "The value of `assignment_count` must be greater than 0 when auto assignment is enabled."
+  }
+}

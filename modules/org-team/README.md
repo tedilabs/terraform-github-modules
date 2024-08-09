@@ -3,6 +3,7 @@
 This module creates following resources.
 
 - `github_team`
+- `github_team_settings`
 - `github_team_membership` (optional)
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
@@ -29,12 +30,14 @@ No modules.
 |------|------|
 | [github_team.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team) | resource |
 | [github_team_membership.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_membership) | resource |
+| [github_team_settings.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_settings) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_name"></a> [name](#input\_name) | (Required) The name of the team. | `string` | n/a | yes |
+| <a name="input_code_review_auto_assignment"></a> [code\_review\_auto\_assignment](#input\_code\_review\_auto\_assignment) | (Optional) A configuration for code review auto assignment. `code_review_auto_assignment` block as defined below.<br>    (Optional) `enabled` - Whether to enable code review auto assignment. Defaults to `false`.<br>    (Optional) `algorithm` - The algorithm to use for code review auto assignment. Valid values are `ROUND_ROBIN` or `LOAD_BALANCE`. Defaults to `ROUND_ROBIN`.<br>    (Optional) `assignment_count` - The number of reviewers to assign for each pull request.<br>    (Optional) `notify_team_enabled` - Whether to notify the entire team when both a team and one or more of its members are requested for review. Defaults to `false`. | <pre>object({<br>    enabled          = optional(bool, false)<br>    algorithm        = optional(string, "ROUND_ROBIN")<br>    assignment_count = optional(number)<br><br>    notify_team_enabled = optional(bool, false)<br>  })</pre> | `{}` | no |
 | <a name="input_default_maintainer_enabled"></a> [default\_maintainer\_enabled](#input\_default\_maintainer\_enabled) | (Optional) If true, adds the creating user as a default maintainer to the team. Defaults to `false`. | `bool` | `false` | no |
 | <a name="input_description"></a> [description](#input\_description) | (Optional) A description of the team. | `string` | `"Managed by Terraform."` | no |
 | <a name="input_is_secret"></a> [is\_secret](#input\_is\_secret) | (Optional) If true, team is only visible to the people on the team and people with owner permissions. Defaults to `false`. | `bool` | `false` | no |
@@ -47,6 +50,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_code_review_auto_assignment"></a> [code\_review\_auto\_assignment](#output\_code\_review\_auto\_assignment) | A configuration for code review auto assignment. |
 | <a name="output_default_maintainer_enabled"></a> [default\_maintainer\_enabled](#output\_default\_maintainer\_enabled) | Whether to add the creating user as a default maintainer. |
 | <a name="output_description"></a> [description](#output\_description) | The description of the team. |
 | <a name="output_id"></a> [id](#output\_id) | The ID of the team. |

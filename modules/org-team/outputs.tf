@@ -52,3 +52,8 @@ output "members" {
   description = "A list of the members of the team."
   value       = var.members
 }
+
+output "code_review_auto_assignment" {
+  description = "A configuration for code review auto assignment."
+  value       = var.code_review_auto_assignment
+}

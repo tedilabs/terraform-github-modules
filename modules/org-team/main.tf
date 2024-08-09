@@ -1,14 +1,3 @@
-resource "github_team" "this" {
-  name        = var.name
-  description = try(var.description, null)
-  privacy     = var.is_secret ? "secret" : "closed"
-
-  parent_team_id            = try(var.parent_id, null)
-  create_default_maintainer = var.default_maintainer_enabled
-
-  ldap_dn = try(var.ldap_group_dn, null)
-}
-
 locals {
   members = [
     for member in var.members : {
@@ -23,6 +12,42 @@ locals {
     }
   ]
   membership = concat(local.members, local.maintainers)
+}
+
+
+###################################################
+# GitHub Organization Team
+###################################################
+
+resource "github_team" "this" {
+  name        = var.name
+  description = var.description
+  privacy     = var.is_secret ? "secret" : "closed"
+
+  parent_team_id            = var.parent_id
+  create_default_maintainer = var.default_maintainer_enabled
+
+  ldap_dn = var.ldap_group_dn
+}
+
+
+###################################################
+# Settings for GitHub Organization Team
+###################################################
+
+resource "github_team_settings" "this" {
+  team_id = github_team.this.id
+
+  dynamic "review_request_delegation" {
+    for_each = var.code_review_auto_assignment.enabled ? [var.code_review_auto_assignment] : []
+    iterator = review
+
+    content {
+      algorithm    = review.value.algorithm
+      member_count = review.value.assignment_count
+      notify       = review.value.notify_team_enabled
+    }
+  }
 }
 
 
