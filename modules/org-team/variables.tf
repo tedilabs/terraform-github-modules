@@ -32,13 +32,6 @@ variable "default_maintainer_enabled" {
   nullable    = false
 }
 
-variable "ldap_group_dn" {
-  description = "(Optional) The LDAP Distinguished Name of the group where membership will be synchronized. Only available in GitHub Enterprise Server."
-  type        = string
-  default     = null
-  nullable    = true
-}
-
 variable "maintainers" {
   description = "(Optional) A list of usernames to add users as `maintainer` role. When applied, the user will become a maintainer of the team."
   type        = set(string)
@@ -56,6 +49,27 @@ variable "members" {
   type        = set(string)
   default     = []
   nullable    = false
+}
+
+variable "identity_provider_team_sync" {
+  description = <<EOT
+  (Optional) A configuration to manage team members using your identity provider groups. `identity_provider_team_sync` block as defined below.
+    (Optional) `enabled` - Whether to enable team synchronization between your identity provider (IdP) and your organization on GitHub. Defaults to `false`.
+    (Optional) `groups` - A set of group names to sync with the team.
+  EOT
+  type = object({
+    enabled = optional(bool, false)
+    groups  = optional(set(string), [])
+  })
+  default  = {}
+  nullable = false
+}
+
+variable "ldap_group_dn" {
+  description = "(Optional) The LDAP Distinguished Name of the group where membership will be synchronized. Only available in GitHub Enterprise Server."
+  type        = string
+  default     = null
+  nullable    = true
 }
 
 variable "code_review_auto_assignment" {

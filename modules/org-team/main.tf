@@ -32,20 +32,39 @@ resource "github_team" "this" {
 
 
 ###################################################
-# Settings for GitHub Organization Team
+# Identity Provider Groups for GitHub Organization Team Sync
 ###################################################
 
-resource "github_team_settings" "this" {
-  team_id = github_team.this.id
+data "github_organization_team_sync_groups" "this" {
+  count = var.identity_provider_team_sync.enabled ? 1 : 0
+}
 
-  dynamic "review_request_delegation" {
-    for_each = var.code_review_auto_assignment.enabled ? [var.code_review_auto_assignment] : []
-    iterator = review
+locals {
+  idp_groups = (var.identity_provider_team_sync.enabled
+    ? {
+      for group in data.github_organization_team_sync_groups.this[0].groups :
+      group.group_name => {
+        id          = group.group_id
+        name        = group.group_name
+        description = group.group_description
+      }
+    }
+    : {}
+  )
+}
+
+resource "github_team_sync_group_mapping" "this" {
+  count = var.identity_provider_team_sync.enabled ? 1 : 0
+
+  team_slug = github_team.this.slug
+
+  dynamic "group" {
+    for_each = var.identity_provider_team_sync.groups
 
     content {
-      algorithm    = review.value.algorithm
-      member_count = review.value.assignment_count
-      notify       = review.value.notify_team_enabled
+      group_id          = local.idp_groups[group.value].id
+      group_name        = local.idp_groups[group.value].name
+      group_description = local.idp_groups[group.value].description
     }
   }
 }
