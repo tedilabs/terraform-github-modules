@@ -30,7 +30,7 @@ resource "github_team_membership" "this" {
   role     = each.value.role
 }
 
-resource "github_team_members" "some_team_members" {
+resource "github_team_members" "this" {
   count = var.membership_sync_enabled ? 1 : 0
 
   team_id = github_team.this.id
