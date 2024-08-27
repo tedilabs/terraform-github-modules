@@ -51,6 +51,13 @@ variable "members" {
   nullable    = false
 }
 
+variable "membership_sync_enabled" {
+  description = "(Optional) Whether to sync the members of the team. Members added outside of the Terraform code will be removed. Defaults to `false`."
+  type        = bool
+  default     = false
+  nullable    = false
+}
+
 variable "identity_provider_team_sync" {
   description = <<EOT
   (Optional) A configuration to manage team members using your identity provider groups. `identity_provider_team_sync` block as defined below.

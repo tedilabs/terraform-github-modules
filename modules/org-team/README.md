@@ -5,6 +5,7 @@ This module creates following resources.
 - `github_team`
 - `github_team_settings`
 - `github_team_sync_group_mapping`
+- `github_team_members` (optional)
 - `github_team_membership` (optional)
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
@@ -30,6 +31,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [github_team.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team) | resource |
+| [github_team_members.some_team_members](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_members) | resource |
 | [github_team_membership.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_membership) | resource |
 | [github_team_settings.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_settings) | resource |
 | [github_team_sync_group_mapping.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_sync_group_mapping) | resource |
@@ -48,6 +50,7 @@ No modules.
 | <a name="input_ldap_group_dn"></a> [ldap\_group\_dn](#input\_ldap\_group\_dn) | (Optional) The LDAP Distinguished Name of the group where membership will be synchronized. Only available in GitHub Enterprise Server. | `string` | `null` | no |
 | <a name="input_maintainers"></a> [maintainers](#input\_maintainers) | (Optional) A list of usernames to add users as `maintainer` role. When applied, the user will become a maintainer of the team. | `set(string)` | `[]` | no |
 | <a name="input_members"></a> [members](#input\_members) | (Optional) A list of usernames to add users as `member` role. When applied, the user will become a member of the team. | `set(string)` | `[]` | no |
+| <a name="input_membership_sync_enabled"></a> [membership\_sync\_enabled](#input\_membership\_sync\_enabled) | (Optional) Whether to sync the members of the team. Members added outside of the Terraform code will be removed. Defaults to `false`. | `bool` | `false` | no |
 | <a name="input_parent_id"></a> [parent\_id](#input\_parent\_id) | (Optional) The ID of the parent team, if this is a nested team. | `string` | `null` | no |
 
 ## Outputs
