@@ -4,6 +4,7 @@ This module creates following resources.
 
 - `github_repository`
 - `github_repository_collaborator` (optional)
+- `github_repository_collaborators` (optional)
 - `github_team_repository` (optional)
 - `github_repository_deploy_key` (optional)
 - `github_issue_label` (optional)
@@ -36,6 +37,7 @@ No modules.
 | [github_issue_label.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/issue_label) | resource |
 | [github_repository.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository) | resource |
 | [github_repository_collaborator.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_collaborator) | resource |
+| [github_repository_collaborators.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_collaborators) | resource |
 | [github_repository_deploy_key.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_deploy_key) | resource |
 | [github_team_repository.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_repository) | resource |
 
@@ -44,8 +46,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_name"></a> [name](#input\_name) | (Required) A name of the repository. | `string` | n/a | yes |
-| <a name="input_admin_collaborators"></a> [admin\_collaborators](#input\_admin\_collaborators) | (Optional) A list of users as collaborator with `admin` permission to the repository. You can use GitHub username. | `set(string)` | `[]` | no |
-| <a name="input_admin_teams"></a> [admin\_teams](#input\_admin\_teams) | (Optional) A list of teams with `admin` permission to the repository. You can use GitHub team id or the GitHub team slug. | `set(string)` | `[]` | no |
+| <a name="input_access"></a> [access](#input\_access) | (Optional) A configuration for the repository access. `access` block as defined below.<br>    (Optional) `collaborators` - A list of collaborators to the repository. Each item of `collaborators` block as defined below.<br>      (Required) `username` - The GitHub username to add to the repository as a collaborator.<br>      (Optional) `role` - The role to grant the collaborator in the repository. Valid values are `read`, `triage`, `write`, `maintain`, `admin` or the name of an existing custom repository role within the organisation. Default is `write`.<br>    (Optional) `teams` - A list of teams to the repository. Each item of `teams` block as defined below.<br>      (Required) `team` - The GitHub team id or the GitHub team slug.<br>      (Optional) `role` - The role to grant the team in the repository. Valid values are `read`, `triage`, `write`, `maintain`, `admin` or the name of an existing custom repository role within the organisation. Default is `read`.<br>    (Optional) `sync_enabled` - Whether to sync the repository access. Accesses added outside of the Terraform code will be removed. Defaults to `false`. | <pre>object({<br>    collaborators = optional(list(object({<br>      username = string<br>      role     = optional(string, "write")<br>    })), [])<br>    teams = optional(list(object({<br>      team = string<br>      role = optional(string, "read")<br>    })), [])<br>    sync_enabled = optional(bool, false)<br>  })</pre> | `{}` | no |
 | <a name="input_archive_on_destroy"></a> [archive\_on\_destroy](#input\_archive\_on\_destroy) | (Optional) Set to `true` to archive the repository instead of deleting on destroy. | `bool` | `false` | no |
 | <a name="input_archived"></a> [archived](#input\_archived) | (Optional) Specify if the repository should be archived. Defaults to `false`. NOTE: Currently, the API does not support unarchiving. | `bool` | `false` | no |
 | <a name="input_branches"></a> [branches](#input\_branches) | (Optional) A list of branches to create and manage within the repository. | `set(string)` | `[]` | no |
@@ -56,29 +57,22 @@ No modules.
 | <a name="input_features"></a> [features](#input\_features) | (Optional) A list of enabled features on the repository. Available features: `ISSUES`, `PROJECTS`, `WIKI`. | `set(string)` | <pre>[<br>  "ISSUES"<br>]</pre> | no |
 | <a name="input_homepage"></a> [homepage](#input\_homepage) | (Optional) A URL of website describing the repository. | `string` | `null` | no |
 | <a name="input_is_template"></a> [is\_template](#input\_is\_template) | (Optional) Set to `true` if this is a template repository. | `bool` | `false` | no |
-| <a name="input_issue_labels"></a> [issue\_labels](#input\_issue\_labels) | (Optional) A list of issue labels for the repository. Each member of `issue_labels` block as defined below.<br>    (Required) `name` - The name of the label.<br>    (Required) `color` - A 6 character hex code, without the leading #, identifying the color of the label.<br>    (Optional) `description` - A short description of the label. | `set(map(string))` | `[]` | no |
-| <a name="input_maintain_collaborators"></a> [maintain\_collaborators](#input\_maintain\_collaborators) | (Optional) A list of users as collaborator with `maintain` permission to the repository. You can use GitHub username. | `set(string)` | `[]` | no |
-| <a name="input_maintain_teams"></a> [maintain\_teams](#input\_maintain\_teams) | (Optional) A list of teams with `maintain` permission to the repository. You can use GitHub team id or the GitHub team slug. | `set(string)` | `[]` | no |
+| <a name="input_issue_labels"></a> [issue\_labels](#input\_issue\_labels) | (Optional) A list of issue labels for the repository. Each member of `issue_labels` block as defined below.<br>    (Required) `name` - The name of the label.<br>    (Required) `color` - A 6 character hex code, without the leading #, identifying the color of the label.<br>    (Optional) `description` - A short description of the label. | <pre>set(object({<br>    name        = string<br>    color       = string<br>    description = optional(string, "Managed by Terraform.")<br>  }))</pre> | `[]` | no |
 | <a name="input_merge_strategies"></a> [merge\_strategies](#input\_merge\_strategies) | (Optional) A list of allowed strategies for merging pull requests on the repository. Available strategies: `MERGE_COMMIT`, `SQUASH`, `REBASE`. | `set(string)` | <pre>[<br>  "SQUASH",<br>  "REBASE"<br>]</pre> | no |
 | <a name="input_pages_cname"></a> [pages\_cname](#input\_pages\_cname) | (Optional) The custom domain for the repository. This can only be set after the repository has been created. | `string` | `null` | no |
 | <a name="input_pages_enabled"></a> [pages\_enabled](#input\_pages\_enabled) | (Optional) Set to true to enable GitHub Pages for the repository. GitHub Pages is designed to host your personal, organization, or project pages from a GitHub repository. | `bool` | `false` | no |
 | <a name="input_pages_source_branch"></a> [pages\_source\_branch](#input\_pages\_source\_branch) | (Optional) The repository branch used to publish the site's source files. Defaults to `gh-pages` branch. | `string` | `"gh-pages"` | no |
 | <a name="input_pages_source_path"></a> [pages\_source\_path](#input\_pages\_source\_path) | (Optional) The repository directory path from which the site publishes. Defaults to `/`. | `string` | `"/"` | no |
-| <a name="input_read_collaborators"></a> [read\_collaborators](#input\_read\_collaborators) | (Optional) A list of users as collaborator with `read` permission to the repository. You can use GitHub username. | `set(string)` | `[]` | no |
-| <a name="input_read_teams"></a> [read\_teams](#input\_read\_teams) | (Optional) A list of teams with `read` permission to the repository. You can use GitHub team id or the GitHub team slug. | `set(string)` | `[]` | no |
 | <a name="input_template"></a> [template](#input\_template) | (Optional) Use a template repository, license or gitignore to create the repository.this resource. `template` block as defined below.<br>    (Optional) `gitignore` - Choose which files not to track from a list of templates. Use the name of the template without the extension. For example, `Haskell`.<br>    (Optional) `init_readme` - Set to `true` to produce an initial commit with README.md in the repository.<br>    (Optional) `license` - A license tells others what they can and can't do with your code. Use the name of the license template without the extension. For example, `mit` or `mpl-2.0`.<br>    (Optional) `repository` - Start this repository with a template repository's contents. The full name of the repository is required. A string of the form `owner/repository`. | `any` | `{}` | no |
 | <a name="input_topics"></a> [topics](#input\_topics) | (Optional) A list of topics for the repository. | `set(string)` | `[]` | no |
-| <a name="input_triage_collaborators"></a> [triage\_collaborators](#input\_triage\_collaborators) | (Optional) A list of users as collaborator with `triage` permission to the repository. You can use GitHub username. | `set(string)` | `[]` | no |
-| <a name="input_triage_teams"></a> [triage\_teams](#input\_triage\_teams) | (Optional) A list of teams with `triage` permission to the repository. You can use GitHub team id or the GitHub team slug. | `set(string)` | `[]` | no |
 | <a name="input_visibility"></a> [visibility](#input\_visibility) | (Optional) Can be `public`, `private` or `internal`. `internal` visibility is only available if your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. | `string` | `"private"` | no |
 | <a name="input_vulnerability_alerts"></a> [vulnerability\_alerts](#input\_vulnerability\_alerts) | (Optional) Set to true to enable security alerts for vulnerable dependencies. Enabling requires alerts to be enabled on the owner level. GitHub enables the alerts on public repos but disables them on private repos by default. | `bool` | `false` | no |
-| <a name="input_write_collaborators"></a> [write\_collaborators](#input\_write\_collaborators) | (Optional) A list of users as collaborator with `write` permission to the repository. You can use GitHub username. | `set(string)` | `[]` | no |
-| <a name="input_write_teams"></a> [write\_teams](#input\_write\_teams) | (Optional) A list of teams with `write` permission to the repository. You can use GitHub team id or the GitHub team slug. | `set(string)` | `[]` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
+| <a name="output_access"></a> [access](#output\_access) | The configuration for the repository access. |
 | <a name="output_archived"></a> [archived](#output\_archived) | Whether the repository is archived. |
 | <a name="output_branches"></a> [branches](#output\_branches) | A list of the repository branches excluding initial branch. |
 | <a name="output_default_branch"></a> [default\_branch](#output\_default\_branch) | The default branch of the repository. |
@@ -97,7 +91,6 @@ No modules.
 | <a name="output_name"></a> [name](#output\_name) | The name of the repository. |
 | <a name="output_node_id"></a> [node\_id](#output\_node\_id) | The node ID of the GitHub repository. This is GraphQL global node id for use with v4 API. |
 | <a name="output_pages"></a> [pages](#output\_pages) | The repository's GitHub Pages configuration. |
-| <a name="output_permissions"></a> [permissions](#output\_permissions) | The access control list which manage individual and team access to the repository. |
 | <a name="output_ssh_clone_url"></a> [ssh\_clone\_url](#output\_ssh\_clone\_url) | The URL that can be provided to `git clone` to clone the repository anonymously via SSH. |
 | <a name="output_template"></a> [template](#output\_template) | The template of the repository. |
 | <a name="output_topics"></a> [topics](#output\_topics) | A list of topics for the repository. |

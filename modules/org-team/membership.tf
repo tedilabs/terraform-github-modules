@@ -12,6 +12,10 @@ locals {
     }
   ]
   membership = concat(local.members, local.maintainers)
+  unsynced_membership = (!var.membership_sync_enabled
+    ? local.membership
+    : []
+  )
 }
 
 
@@ -21,7 +25,7 @@ locals {
 
 resource "github_team_membership" "this" {
   for_each = {
-    for member in(!var.membership_sync_enabled ? local.membership : []) :
+    for member in local.unsynced_membership :
     member.username => member
   }
 
