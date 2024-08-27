@@ -99,6 +99,17 @@ output "issue_labels" {
   ]
 }
 
+output "autolink_references" {
+  description = "A list of autolink references for the repository."
+  value = [
+    for reference in github_repository_autolink_reference.this : {
+      key_prefix          = reference.key_prefix
+      target_url_template = reference.target_url_template
+      is_alphanumeric     = reference.is_alphanumeric
+    }
+  ]
+}
+
 output "access" {
   description = "The configuration for the repository access."
   value = {

@@ -6,6 +6,7 @@ This module creates following resources.
 - `github_repository_collaborator` (optional)
 - `github_repository_collaborators` (optional)
 - `github_team_repository` (optional)
+- `github_repository_autolink_reference` (optional)
 - `github_repository_deploy_key` (optional)
 - `github_issue_label` (optional)
 - `github_branch_default` (optional)
@@ -36,6 +37,7 @@ No modules.
 | [github_branch_default.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/branch_default) | resource |
 | [github_issue_label.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/issue_label) | resource |
 | [github_repository.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository) | resource |
+| [github_repository_autolink_reference.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_autolink_reference) | resource |
 | [github_repository_collaborator.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_collaborator) | resource |
 | [github_repository_collaborators.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_collaborators) | resource |
 | [github_repository_deploy_key.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_deploy_key) | resource |
@@ -49,6 +51,7 @@ No modules.
 | <a name="input_access"></a> [access](#input\_access) | (Optional) A configuration for the repository access. `access` block as defined below.<br>    (Optional) `collaborators` - A list of collaborators to the repository. Each item of `collaborators` block as defined below.<br>      (Required) `username` - The GitHub username to add to the repository as a collaborator.<br>      (Optional) `role` - The role to grant the collaborator in the repository. Valid values are `read`, `triage`, `write`, `maintain`, `admin` or the name of an existing custom repository role within the organisation. Default is `write`.<br>    (Optional) `teams` - A list of teams to the repository. Each item of `teams` block as defined below.<br>      (Required) `team` - The GitHub team id or the GitHub team slug.<br>      (Optional) `role` - The role to grant the team in the repository. Valid values are `read`, `triage`, `write`, `maintain`, `admin` or the name of an existing custom repository role within the organisation. Default is `read`.<br>    (Optional) `sync_enabled` - Whether to sync the repository access. Accesses added outside of the Terraform code will be removed. Defaults to `false`. | <pre>object({<br>    collaborators = optional(list(object({<br>      username = string<br>      role     = optional(string, "write")<br>    })), [])<br>    teams = optional(list(object({<br>      team = string<br>      role = optional(string, "read")<br>    })), [])<br>    sync_enabled = optional(bool, false)<br>  })</pre> | `{}` | no |
 | <a name="input_archive_on_destroy"></a> [archive\_on\_destroy](#input\_archive\_on\_destroy) | (Optional) Set to `true` to archive the repository instead of deleting on destroy. | `bool` | `false` | no |
 | <a name="input_archived"></a> [archived](#input\_archived) | (Optional) Specify if the repository should be archived. Defaults to `false`. NOTE: Currently, the API does not support unarchiving. | `bool` | `false` | no |
+| <a name="input_autolink_references"></a> [autolink\_references](#input\_autolink\_references) | (Optional) A list of autolink references for the repository. Each item of `autolink_references` block as defined below.<br>    (Required) `key_prefix` - This prefix appended by a string will generate a link any time it is found in an issue, pull request, or commit.<br>    (Required) `target_url_template` - The URL must contain <num> for the reference number.<br>    (Optional) `is_alphanumeric` - Whether this autolink reference matches alphanumeric characters. If false, this autolink reference only matches numeric characters. Defaults to `false`. | <pre>set(object({<br>    key_prefix          = string<br>    target_url_template = string<br>    is_alphanumeric     = optional(bool, false)<br>  }))</pre> | `[]` | no |
 | <a name="input_branches"></a> [branches](#input\_branches) | (Optional) A list of branches to create and manage within the repository. | `set(string)` | `[]` | no |
 | <a name="input_default_branch"></a> [default\_branch](#input\_default\_branch) | (Optional) Set the default branch for the repository. Default is `main` branch. | `string` | `"main"` | no |
 | <a name="input_delete_branch_on_merge"></a> [delete\_branch\_on\_merge](#input\_delete\_branch\_on\_merge) | (Optional) Automatically delete head branch after a pull request is merged. Defaults to true. | `bool` | `true` | no |
@@ -74,6 +77,7 @@ No modules.
 |------|-------------|
 | <a name="output_access"></a> [access](#output\_access) | The configuration for the repository access. |
 | <a name="output_archived"></a> [archived](#output\_archived) | Whether the repository is archived. |
+| <a name="output_autolink_references"></a> [autolink\_references](#output\_autolink\_references) | A list of autolink references for the repository. |
 | <a name="output_branches"></a> [branches](#output\_branches) | A list of the repository branches excluding initial branch. |
 | <a name="output_default_branch"></a> [default\_branch](#output\_default\_branch) | The default branch of the repository. |
 | <a name="output_delete_branch_on_merge"></a> [delete\_branch\_on\_merge](#output\_delete\_branch\_on\_merge) | Automatically delete head branch after a pull request is merged. |

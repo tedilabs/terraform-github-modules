@@ -109,6 +109,22 @@ variable "issue_labels" {
   nullable = false
 }
 
+variable "autolink_references" {
+  description = <<EOF
+  (Optional) A list of autolink references for the repository. Each item of `autolink_references` block as defined below.
+    (Required) `key_prefix` - This prefix appended by a string will generate a link any time it is found in an issue, pull request, or commit.
+    (Required) `target_url_template` - The URL must contain <num> for the reference number.
+    (Optional) `is_alphanumeric` - Whether this autolink reference matches alphanumeric characters. If false, this autolink reference only matches numeric characters. Defaults to `false`.
+  EOF
+  type = set(object({
+    key_prefix          = string
+    target_url_template = string
+    is_alphanumeric     = optional(bool, false)
+  }))
+  default  = []
+  nullable = false
+}
+
 variable "access" {
   description = <<EOF
   (Optional) A configuration for the repository access. `access` block as defined below.
