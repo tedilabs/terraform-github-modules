@@ -1,20 +1,3 @@
-locals {
-  members = [
-    for member in var.members : {
-      username = member
-      role     = "member"
-    }
-  ]
-  maintainers = [
-    for maintainer in var.maintainers : {
-      username = maintainer
-      role     = "maintainer"
-    }
-  ]
-  membership = concat(local.members, local.maintainers)
-}
-
-
 ###################################################
 # GitHub Organization Team
 ###################################################
@@ -67,20 +50,4 @@ resource "github_team_sync_group_mapping" "this" {
       group_description = local.idp_groups[group.value].description
     }
   }
-}
-
-
-###################################################
-# Membership of GitHub Organization Team
-###################################################
-
-resource "github_team_membership" "this" {
-  for_each = {
-    for member in local.membership :
-    member.username => member
-  }
-
-  team_id  = github_team.this.id
-  username = each.key
-  role     = each.value.role
 }
