@@ -1,12 +1,14 @@
 variable "name" {
   description = "(Required) A name of the repository."
   type        = string
+  nullable    = false
 }
 
 variable "description" {
   description = "(Optional) A description of the repository."
   type        = string
   default     = "Managed by Terraform."
+  nullable    = false
 }
 
 variable "homepage" {
@@ -19,24 +21,28 @@ variable "visibility" {
   description = "(Optional) Can be `public`, `private` or `internal`. `internal` visibility is only available if your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+."
   type        = string
   default     = "private"
+  nullable    = false
 }
 
 variable "is_template" {
   description = "(Optional) Set to `true` if this is a template repository."
   type        = bool
   default     = false
+  nullable    = false
 }
 
 variable "archived" {
   description = "(Optional) Specify if the repository should be archived. Defaults to `false`. NOTE: Currently, the API does not support unarchiving."
   type        = bool
   default     = false
+  nullable    = false
 }
 
 variable "archive_on_destroy" {
   description = "(Optional) Set to `true` to archive the repository instead of deleting on destroy."
   type        = bool
   default     = false
+  nullable    = false
 }
 
 # INFO: https://github.com/github/gitignore
@@ -51,12 +57,14 @@ variable "template" {
   EOF
   type        = any
   default     = {}
+  nullable    = false
 }
 
 variable "features" {
   description = "(Optional) A list of enabled features on the repository. Available features: `ISSUES`, `PROJECTS`, `WIKI`."
   type        = set(string)
   default     = ["ISSUES"]
+  nullable    = false
 
   validation {
     condition = alltrue([
@@ -71,6 +79,7 @@ variable "merge_strategies" {
   description = "(Optional) A list of allowed strategies for merging pull requests on the repository. Available strategies: `MERGE_COMMIT`, `SQUASH`, `REBASE`."
   type        = set(string)
   default     = ["SQUASH", "REBASE"]
+  nullable    = false
 
   validation {
     condition = alltrue([
@@ -82,15 +91,17 @@ variable "merge_strategies" {
 }
 
 variable "delete_branch_on_merge" {
-  description = "(Optional) Automatically delete head branch after a pull request is merged. Defaults to true."
+  description = "(Optional) Automatically delete head branch after a pull request is merged. Defaults to `true`."
   type        = bool
   default     = true
+  nullable    = false
 }
 
 variable "topics" {
   description = "(Optional) A list of topics for the repository."
   type        = set(string)
   default     = []
+  nullable    = false
 }
 
 variable "issue_labels" {
@@ -155,6 +166,7 @@ variable "branches" {
   description = "(Optional) A list of branches to create and manage within the repository."
   type        = set(string)
   default     = []
+  nullable    = false
 }
 
 variable "default_branch" {
@@ -167,6 +179,7 @@ variable "vulnerability_alerts" {
   description = "(Optional) Set to true to enable security alerts for vulnerable dependencies. Enabling requires alerts to be enabled on the owner level. GitHub enables the alerts on public repos but disables them on private repos by default."
   type        = bool
   default     = false
+  nullable    = false
 }
 
 variable "deploy_keys" {
@@ -189,22 +202,26 @@ variable "pages_enabled" {
   description = "(Optional) Set to true to enable GitHub Pages for the repository. GitHub Pages is designed to host your personal, organization, or project pages from a GitHub repository."
   type        = bool
   default     = false
+  nullable    = false
 }
 
 variable "pages_source_branch" {
   description = "(Optional) The repository branch used to publish the site's source files. Defaults to `gh-pages` branch."
   type        = string
   default     = "gh-pages"
+  nullable    = false
 }
 
 variable "pages_source_path" {
   description = "(Optional) The repository directory path from which the site publishes. Defaults to `/`."
   type        = string
   default     = "/"
+  nullable    = false
 }
 
 variable "pages_cname" {
   description = "(Optional) The custom domain for the repository. This can only be set after the repository has been created."
   type        = string
   default     = null
+  nullable    = true
 }

@@ -1,3 +1,5 @@
+# INFO: Use a separate resource
+# - `topics`
 resource "github_repository" "this" {
   name         = var.name
   description  = var.description
@@ -32,8 +34,6 @@ resource "github_repository" "this" {
   delete_branch_on_merge = var.delete_branch_on_merge
   vulnerability_alerts   = var.vulnerability_alerts
 
-  topics = var.topics
-
   dynamic "pages" {
     for_each = var.pages_enabled ? ["go"] : []
 
@@ -52,6 +52,7 @@ resource "github_repository" "this" {
       license_template,
       gitignore_template,
       template,
+      topics,
     ]
   }
 }

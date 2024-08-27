@@ -85,7 +85,7 @@ output "delete_branch_on_merge" {
 
 output "topics" {
   description = "A list of topics for the repository."
-  value       = github_repository.this.topics
+  value       = github_repository_topics.this.topics
 }
 
 output "issue_labels" {

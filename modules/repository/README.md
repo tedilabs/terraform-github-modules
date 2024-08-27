@@ -8,6 +8,7 @@ This module creates following resources.
 - `github_team_repository` (optional)
 - `github_repository_autolink_reference` (optional)
 - `github_repository_deploy_key` (optional)
+- `github_repository_topics` (optional)
 - `github_issue_label` (optional)
 - `github_branch_default` (optional)
 
@@ -41,6 +42,7 @@ No modules.
 | [github_repository_collaborator.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_collaborator) | resource |
 | [github_repository_collaborators.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_collaborators) | resource |
 | [github_repository_deploy_key.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_deploy_key) | resource |
+| [github_repository_topics.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_topics) | resource |
 | [github_team_repository.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_repository) | resource |
 
 ## Inputs
@@ -54,7 +56,7 @@ No modules.
 | <a name="input_autolink_references"></a> [autolink\_references](#input\_autolink\_references) | (Optional) A list of autolink references for the repository. Each item of `autolink_references` block as defined below.<br>    (Required) `key_prefix` - This prefix appended by a string will generate a link any time it is found in an issue, pull request, or commit.<br>    (Required) `target_url_template` - The URL must contain <num> for the reference number.<br>    (Optional) `is_alphanumeric` - Whether this autolink reference matches alphanumeric characters. If false, this autolink reference only matches numeric characters. Defaults to `false`. | <pre>set(object({<br>    key_prefix          = string<br>    target_url_template = string<br>    is_alphanumeric     = optional(bool, false)<br>  }))</pre> | `[]` | no |
 | <a name="input_branches"></a> [branches](#input\_branches) | (Optional) A list of branches to create and manage within the repository. | `set(string)` | `[]` | no |
 | <a name="input_default_branch"></a> [default\_branch](#input\_default\_branch) | (Optional) Set the default branch for the repository. Default is `main` branch. | `string` | `"main"` | no |
-| <a name="input_delete_branch_on_merge"></a> [delete\_branch\_on\_merge](#input\_delete\_branch\_on\_merge) | (Optional) Automatically delete head branch after a pull request is merged. Defaults to true. | `bool` | `true` | no |
+| <a name="input_delete_branch_on_merge"></a> [delete\_branch\_on\_merge](#input\_delete\_branch\_on\_merge) | (Optional) Automatically delete head branch after a pull request is merged. Defaults to `true`. | `bool` | `true` | no |
 | <a name="input_deploy_keys"></a> [deploy\_keys](#input\_deploy\_keys) | (Optional) A list of deploy keys to grant access to the repository. A deploy key is a SSH key. Each item of `deploy_keys` block as defined below.<br>    (Optional) `name` - A name of deploy key.<br>    (Required) `key` - A SSH key. Begins with 'ssh-rsa', 'ecdsa-sha2-nistp256', 'ecdsa-sha2-nistp384', 'ecdsa-sha2-nistp521', 'ssh-ed25519', 'sk-ecdsa-sha2-nistp256@openssh.com', or 'sk-ssh-ed25519@openssh.com'.<br>    (Optional) `writable` - Whether to allow write access to the repository. The key can be used to push to the repository if enabled. Defaults to `false`. | <pre>list(object({<br>    name     = optional(string)<br>    key      = string<br>    writable = optional(bool, false)<br>  }))</pre> | `[]` | no |
 | <a name="input_description"></a> [description](#input\_description) | (Optional) A description of the repository. | `string` | `"Managed by Terraform."` | no |
 | <a name="input_features"></a> [features](#input\_features) | (Optional) A list of enabled features on the repository. Available features: `ISSUES`, `PROJECTS`, `WIKI`. | `set(string)` | <pre>[<br>  "ISSUES"<br>]</pre> | no |
