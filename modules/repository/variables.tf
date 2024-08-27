@@ -100,68 +100,39 @@ variable "issue_labels" {
     (Required) `color` - A 6 character hex code, without the leading #, identifying the color of the label.
     (Optional) `description` - A short description of the label.
   EOF
-  type        = set(map(string))
-  default     = []
+  type = set(object({
+    name        = string
+    color       = string
+    description = optional(string, "Managed by Terraform.")
+  }))
+  default  = []
+  nullable = false
 }
 
-variable "read_teams" {
-  description = "(Optional) A list of teams with `read` permission to the repository. You can use GitHub team id or the GitHub team slug."
-  type        = set(string)
-  default     = []
-}
-
-variable "triage_teams" {
-  description = "(Optional) A list of teams with `triage` permission to the repository. You can use GitHub team id or the GitHub team slug."
-  type        = set(string)
-  default     = []
-}
-
-variable "write_teams" {
-  description = "(Optional) A list of teams with `write` permission to the repository. You can use GitHub team id or the GitHub team slug."
-  type        = set(string)
-  default     = []
-}
-
-variable "maintain_teams" {
-  description = "(Optional) A list of teams with `maintain` permission to the repository. You can use GitHub team id or the GitHub team slug."
-  type        = set(string)
-  default     = []
-}
-
-variable "admin_teams" {
-  description = "(Optional) A list of teams with `admin` permission to the repository. You can use GitHub team id or the GitHub team slug."
-  type        = set(string)
-  default     = []
-}
-
-variable "read_collaborators" {
-  description = "(Optional) A list of users as collaborator with `read` permission to the repository. You can use GitHub username."
-  type        = set(string)
-  default     = []
-}
-
-variable "triage_collaborators" {
-  description = "(Optional) A list of users as collaborator with `triage` permission to the repository. You can use GitHub username."
-  type        = set(string)
-  default     = []
-}
-
-variable "write_collaborators" {
-  description = "(Optional) A list of users as collaborator with `write` permission to the repository. You can use GitHub username."
-  type        = set(string)
-  default     = []
-}
-
-variable "maintain_collaborators" {
-  description = "(Optional) A list of users as collaborator with `maintain` permission to the repository. You can use GitHub username."
-  type        = set(string)
-  default     = []
-}
-
-variable "admin_collaborators" {
-  description = "(Optional) A list of users as collaborator with `admin` permission to the repository. You can use GitHub username."
-  type        = set(string)
-  default     = []
+variable "access" {
+  description = <<EOF
+  (Optional) A configuration for the repository access. `access` block as defined below.
+    (Optional) `collaborators` - A list of collaborators to the repository. Each item of `collaborators` block as defined below.
+      (Required) `username` - The GitHub username to add to the repository as a collaborator.
+      (Optional) `role` - The role to grant the collaborator in the repository. Valid values are `read`, `triage`, `write`, `maintain`, `admin` or the name of an existing custom repository role within the organisation. Default is `write`.
+    (Optional) `teams` - A list of teams to the repository. Each item of `teams` block as defined below.
+      (Required) `team` - The GitHub team id or the GitHub team slug.
+      (Optional) `role` - The role to grant the team in the repository. Valid values are `read`, `triage`, `write`, `maintain`, `admin` or the name of an existing custom repository role within the organisation. Default is `read`.
+    (Optional) `sync_enabled` - Whether to sync the repository access. Accesses added outside of the Terraform code will be removed. Defaults to `false`.
+  EOF
+  type = object({
+    collaborators = optional(list(object({
+      username = string
+      role     = optional(string, "write")
+    })), [])
+    teams = optional(list(object({
+      team = string
+      role = optional(string, "read")
+    })), [])
+    sync_enabled = optional(bool, false)
+  })
+  default  = {}
+  nullable = false
 }
 
 variable "branches" {

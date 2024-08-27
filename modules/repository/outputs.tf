@@ -99,29 +99,12 @@ output "issue_labels" {
   ]
 }
 
-output "permissions" {
-  description = "The access control list which manage individual and team access to the repository."
+output "access" {
+  description = "The configuration for the repository access."
   value = {
-    read = {
-      teams         = var.read_teams
-      collaborators = var.read_collaborators
-    }
-    triage = {
-      teams         = var.triage_teams
-      collaborators = var.triage_collaborators
-    }
-    write = {
-      teams         = var.write_teams
-      collaborators = var.write_collaborators
-    }
-    maintain = {
-      teams         = var.maintain_teams
-      collaborators = var.maintain_collaborators
-    }
-    admin = {
-      teams         = var.admin_teams
-      collaborators = var.admin_collaborators
-    }
+    collaborators = var.access.collaborators
+    teams         = var.access.teams
+    sync_enabled  = var.access.sync_enabled
   }
 }
 

@@ -12,5 +12,5 @@ resource "github_issue_label" "this" {
 
   name        = each.key
   color       = each.value.color
-  description = try(each.value.description, "Managed by Terraform.")
+  description = each.value.description
 }
