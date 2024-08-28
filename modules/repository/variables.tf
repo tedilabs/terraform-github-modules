@@ -14,7 +14,8 @@ variable "description" {
 variable "homepage" {
   description = "(Optional) A URL of website describing the repository."
   type        = string
-  default     = null
+  default     = ""
+  nullable    = false
 }
 
 variable "visibility" {
@@ -25,7 +26,7 @@ variable "visibility" {
 }
 
 variable "is_template" {
-  description = "(Optional) Set to `true` if this is a template repository."
+  description = "(Optional) Whether this is a template repository. Defaults to `false`."
   type        = bool
   default     = false
   nullable    = false
@@ -39,7 +40,7 @@ variable "archived" {
 }
 
 variable "archive_on_destroy" {
-  description = "(Optional) Set to `true` to archive the repository instead of deleting on destroy."
+  description = "(Optional) Whether to archive the repository instead of deleting on destroy. Defaults to `false`."
   type        = bool
   default     = false
   nullable    = false
@@ -51,17 +52,24 @@ variable "template" {
   description = <<EOF
   (Optional) Use a template repository, license or gitignore to create the repository.this resource. `template` block as defined below.
     (Optional) `gitignore` - Choose which files not to track from a list of templates. Use the name of the template without the extension. For example, `Haskell`.
-    (Optional) `init_readme` - Set to `true` to produce an initial commit with README.md in the repository.
+    (Optional) `init_readme` - Whether to produce an initial commit with README.md in the repository. Defaults to `false`.
     (Optional) `license` - A license tells others what they can and can't do with your code. Use the name of the license template without the extension. For example, `mit` or `mpl-2.0`.
     (Optional) `repository` - Start this repository with a template repository's contents. The full name of the repository is required. A string of the form `owner/repository`.
   EOF
-  type        = any
-  default     = {}
-  nullable    = false
+  type = object({
+    gitignore   = optional(string)
+    init_readme = optional(bool, false)
+    license     = optional(string)
+    repository  = optional(string)
+  })
+  default  = {}
+  nullable = false
 }
 
 variable "features" {
-  description = "(Optional) A list of enabled features on the repository. Available features: `ISSUES`, `PROJECTS`, `WIKI`."
+  description = <<EOF
+  (Optional) A list of enabled features on the repository. Available features: `ISSUES`, `PROJECTS`, `WIKI`. Defaults to `["ISSUES"]`
+  EOF
   type        = set(string)
   default     = ["ISSUES"]
   nullable    = false
@@ -76,7 +84,9 @@ variable "features" {
 }
 
 variable "merge_strategies" {
-  description = "(Optional) A list of allowed strategies for merging pull requests on the repository. Available strategies: `MERGE_COMMIT`, `SQUASH`, `REBASE`."
+  description = <<EOF
+  (Optional) A list of allowed strategies for merging pull requests on the repository. Available strategies: `MERGE_COMMIT`, `SQUASH`, `REBASE`. Defaults to `["SQUASH", "REBASE"]`.
+  EOF
   type        = set(string)
   default     = ["SQUASH", "REBASE"]
   nullable    = false
@@ -88,6 +98,13 @@ variable "merge_strategies" {
     ])
     error_message = "Available strategies: `MERGE_COMMIT`, `SQUASH`, `REBASE`."
   }
+}
+
+variable "auto_merge_enabled" {
+  description = "(Optional) Whether to wait for merge requirements to be met and then merge automatically. Defaults to `false`."
+  type        = bool
+  default     = false
+  nullable    = false
 }
 
 variable "delete_branch_on_merge" {
@@ -198,30 +215,23 @@ variable "deploy_keys" {
   nullable = false
 }
 
-variable "pages_enabled" {
-  description = "(Optional) Set to true to enable GitHub Pages for the repository. GitHub Pages is designed to host your personal, organization, or project pages from a GitHub repository."
-  type        = bool
-  default     = false
-  nullable    = false
-}
-
-variable "pages_source_branch" {
-  description = "(Optional) The repository branch used to publish the site's source files. Defaults to `gh-pages` branch."
-  type        = string
-  default     = "gh-pages"
-  nullable    = false
-}
-
-variable "pages_source_path" {
-  description = "(Optional) The repository directory path from which the site publishes. Defaults to `/`."
-  type        = string
-  default     = "/"
-  nullable    = false
-}
-
-variable "pages_cname" {
-  description = "(Optional) The custom domain for the repository. This can only be set after the repository has been created."
-  type        = string
-  default     = null
-  nullable    = true
+variable "pages" {
+  description = <<EOF
+  (Optional) A configuration of GitHub Pages for the repository. `pages` block as defined below.
+    (Optional) `enabled` - Whether to enable GitHub Pages for the repository. GitHub Pages is designed to host your personal, organization, or project pages from a GitHub repository. Defaults to `false`.
+    (Optional) `source` - A configuration of the repository source files for the site. `source` block as defined below.
+      (Optional) `branch` - The repository branch used to publish the site's source files. Defaults to `gh-pages` branch.
+      (Optional) `path` - The repository directory path from which the site publishes. Defaults to `/`.
+    (Optional) `cname` - The custom domain for the repository. This can only be set after the repository has been created.
+  EOF
+  type = object({
+    enabled = optional(bool, false)
+    source = optional(object({
+      branch = optional(string, "gh-pages")
+      path   = optional(string, "/")
+    }), {})
+    cname = optional(string)
+  })
+  default  = {}
+  nullable = false
 }

@@ -78,6 +78,11 @@ output "merge_strategies" {
   value       = var.merge_strategies
 }
 
+output "auto_merge_enabled" {
+  description = "Whether to wait for merge requirements to be met and then merge automatically."
+  value       = github_repository.this.allow_auto_merge
+}
+
 output "delete_branch_on_merge" {
   description = "Automatically delete head branch after a pull request is merged."
   value       = github_repository.this.delete_branch_on_merge
@@ -148,12 +153,5 @@ output "deploy_keys" {
 
 output "pages" {
   description = "The repository's GitHub Pages configuration."
-  value = {
-    eanbled = var.pages_enabled
-    cname   = var.pages_cname
-    source = {
-      branch = var.pages_source_branch
-      path   = var.pages_source_path
-    }
-  }
+  value       = var.pages
 }

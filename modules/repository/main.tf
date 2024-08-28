@@ -1,21 +1,28 @@
+# INFO: Not supported attributes
+# - `private`
+# - `has_downloads`
 # INFO: Use a separate resource
 # - `topics`
+# - `default_branch`
 resource "github_repository" "this" {
   name         = var.name
   description  = var.description
   homepage_url = var.homepage
 
   visibility         = var.visibility
-  is_template        = var.is_template
   archived           = var.archived
   archive_on_destroy = var.archive_on_destroy
 
-  auto_init          = try(var.template.init_readme, false)
-  license_template   = try(var.template.license, null)
-  gitignore_template = try(var.template.gitignore, null)
+
+  ## Template
+  is_template = var.is_template
+
+  auto_init          = var.template.init_readme
+  license_template   = var.template.license
+  gitignore_template = var.template.gitignore
 
   dynamic "template" {
-    for_each = try([var.template.repository], [])
+    for_each = var.template.repository != null ? [var.template.repository] : []
 
     content {
       owner      = split("/", template.value)[0]
@@ -23,26 +30,33 @@ resource "github_repository" "this" {
     }
   }
 
+
+  ## Features
   has_issues   = contains(var.features, "ISSUES")
   has_projects = contains(var.features, "PROJECTS")
   has_wiki     = contains(var.features, "WIKI")
 
+
+  ## Pull Request
   allow_merge_commit = contains(var.merge_strategies, "MERGE_COMMIT")
   allow_squash_merge = contains(var.merge_strategies, "SQUASH")
   allow_rebase_merge = contains(var.merge_strategies, "REBASE")
 
+  allow_auto_merge       = var.auto_merge_enabled
   delete_branch_on_merge = var.delete_branch_on_merge
   vulnerability_alerts   = var.vulnerability_alerts
 
+
+  ## Pages
   dynamic "pages" {
-    for_each = var.pages_enabled ? ["go"] : []
+    for_each = var.pages.enabled ? [var.pages] : []
 
     content {
       source {
-        branch = var.pages_source_branch
-        path   = var.pages_source_path
+        branch = pages.value.source.branch
+        path   = pages.value.source.path
       }
-      cname = try(var.pages_cname, null)
+      cname = pages.value.cname
     }
   }
 
@@ -53,6 +67,7 @@ resource "github_repository" "this" {
       gitignore_template,
       template,
       topics,
+      has_downloads,
     ]
   }
 }
