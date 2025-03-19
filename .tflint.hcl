@@ -2,7 +2,7 @@ config {
   plugin_dir = "~/.tflint.d/plugins"
 
   format = "compact"
-  module = true
+  call_module_type = "local"
   force = false
   disabled_by_default = false
 
@@ -61,17 +61,4 @@ rule "terraform_unused_declarations" {
 
 rule "terraform_unused_required_providers" {
   enabled = true
-}
-
-
-###################################################
-# Rule Sets - AWS
-###################################################
-
-plugin "aws" {
-  source  = "github.com/terraform-linters/tflint-ruleset-aws"
-  version = "0.21.1"
-
-  enabled = true
-  deep_check = false
 }
