@@ -6,7 +6,7 @@ This module creates following resources.
 - `github_organization_block` (optional)
 - `github_organization_security_manager` (optional)
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -59,4 +59,4 @@ No modules.
 | <a name="output_repositories"></a> [repositories](#output\_repositories) | A list of the repositories of the organization. |
 | <a name="output_security_manager_teams"></a> [security\_manager\_teams](#output\_security\_manager\_teams) | A list of team slugs to add as security manager teams. |
 | <a name="output_users"></a> [users](#output\_users) | A list of all members of the organization. |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->

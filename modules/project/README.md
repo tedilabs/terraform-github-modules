@@ -6,7 +6,7 @@ This module creates following resources.
 - `github_organization_project` (optional)
 - `github_project_column` (optional)
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -53,4 +53,4 @@ No modules.
 | <a name="output_name"></a> [name](#output\_name) | The name of the project. |
 | <a name="output_repository"></a> [repository](#output\_repository) | The repository which the project is created. |
 | <a name="output_url"></a> [url](#output\_url) | The URL of the project. |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->

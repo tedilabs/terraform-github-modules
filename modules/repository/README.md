@@ -12,7 +12,7 @@ This module creates following resources.
 - `github_issue_label` (optional)
 - `github_branch_default` (optional)
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -102,4 +102,4 @@ No modules.
 | <a name="output_url"></a> [url](#output\_url) | The URL of the repository. |
 | <a name="output_visibility"></a> [visibility](#output\_visibility) | The visibility of the repository. Can be `public`, `private` or `internal`. |
 | <a name="output_vulnerability_alerts"></a> [vulnerability\_alerts](#output\_vulnerability\_alerts) | Whether the security alerts are enabled for vulnerable dpendencies. |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->

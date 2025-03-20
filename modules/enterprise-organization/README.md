@@ -5,7 +5,7 @@ This module creates following resources.
 - `github_membership` (optional)
 - `github_organization_block` (optional)
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -53,4 +53,4 @@ No modules.
 | <a name="output_id"></a> [id](#output\_id) | The ID of the organization. |
 | <a name="output_name"></a> [name](#output\_name) | The name of the organization. |
 | <a name="output_owners"></a> [owners](#output\_owners) | A list of organization owner usernames. |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->

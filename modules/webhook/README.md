@@ -5,7 +5,7 @@ This module creates following resources.
 - `github_organization_webhook` (optional)
 - `github_repository_webhook` (optional)
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -52,4 +52,4 @@ No modules.
 | <a name="output_repositories"></a> [repositories](#output\_repositories) | A list of repositories which the webhook is for. |
 | <a name="output_ssl_enabled"></a> [ssl\_enabled](#output\_ssl\_enabled) | Whether SSL verification is enabled. |
 | <a name="output_url"></a> [url](#output\_url) | The URL of the webhook. |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->
