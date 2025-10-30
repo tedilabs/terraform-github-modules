@@ -32,9 +32,10 @@ resource "github_repository" "this" {
 
 
   ## Features
-  has_issues   = contains(var.features, "ISSUES")
-  has_projects = contains(var.features, "PROJECTS")
-  has_wiki     = contains(var.features, "WIKI")
+  has_discussions = contains(var.features, "DISCUSSIONS")
+  has_issues      = contains(var.features, "ISSUES")
+  has_projects    = contains(var.features, "PROJECTS")
+  has_wiki        = contains(var.features, "WIKI")
 
 
   ## Pull Request
@@ -70,4 +71,36 @@ resource "github_repository" "this" {
       has_downloads,
     ]
   }
+}
+
+
+###################################################
+# Files for GitHub Repository
+###################################################
+
+# INFO: Not supported attributes
+# - `autocreate_branch_source_branch`
+# - `autocreate_branch_source_sha`
+resource "github_repository_file" "this" {
+  for_each = (var.default_branch != null
+    ? {
+      for file in var.files :
+      file.file.path => file
+    }
+    : {}
+  )
+
+  repository = github_repository.this.name
+  branch     = github_branch_default.this[0].branch
+
+  file    = each.value.file.path
+  content = each.value.file.content
+
+  commit_author  = each.value.commit.author
+  commit_email   = each.value.commit.email
+  commit_message = each.value.commit.message
+
+  overwrite_on_create = each.value.overwrite_on_create
+
+  autocreate_branch = false
 }

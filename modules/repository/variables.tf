@@ -68,7 +68,7 @@ variable "template" {
 
 variable "features" {
   description = <<EOF
-  (Optional) A list of enabled features on the repository. Available features: `ISSUES`, `PROJECTS`, `WIKI`. Defaults to `["ISSUES"]`
+  (Optional) A list of enabled features on the repository. Available features: `DISCUSSIONS`, `ISSUES`, `PROJECTS`, `WIKI`. Defaults to `["ISSUES"]`
   EOF
   type        = set(string)
   default     = ["ISSUES"]
@@ -77,9 +77,9 @@ variable "features" {
   validation {
     condition = alltrue([
       for feature in var.features :
-      contains(["ISSUES", "PROJECTS", "WIKI"], feature)
+      contains(["DISCUSSIONS", "ISSUES", "PROJECTS", "WIKI"], feature)
     ])
-    error_message = "Available features: `ISSUES`, `PROJECTS`, `WIKI`."
+    error_message = "Available features: `DISCUSSIONS`, `ISSUES`, `PROJECTS`, `WIKI`."
   }
 }
 
@@ -190,6 +190,34 @@ variable "default_branch" {
   description = "(Optional) Set the default branch for the repository. Default is `main` branch."
   type        = string
   default     = "main"
+}
+
+variable "files" {
+  description = <<EOF
+  (Optional) A list of files to create and manage within the repository. Each item of `files` block as defined below.
+    (Required) `file` - A `file` block as defined below.
+      (Required) `path` - The path of the file to manage.
+      (Required) `content` - The file content.
+    (Optional) `commit` - A `commit` block as defined below.
+      (Optional) `author` - Committer author name to use. NOTE: GitHub app users may omit author and email information so GitHub can verify commits as the GitHub App. This maybe useful when a branch protection rule requires signed commits.
+      (Optional) `email` - Committer email address to use. NOTE: GitHub app users may omit author and email information so GitHub can verify commits as the GitHub App. This may be useful when a branch protection rule requires signed commits.
+      (Optional) `message` - The commit message when creating, updating or deleting the managed file. Defaults to `chore: managed by Terraform.`.
+    (Optional) `overwrite_on_create` - Enable overwriting existing files. If set to true it will overwrite an existing file with the same name. If set to false it will fail if there is an existing file with the same name. Defaults to `true`.
+  EOF
+  type = list(object({
+    file = object({
+      path    = string
+      content = string
+    })
+    commit = optional(object({
+      author  = optional(string)
+      email   = optional(string)
+      message = optional(string, "chore: managed by Terraform.")
+    }), {})
+    overwrite_on_create = optional(bool, true)
+  }))
+  default  = []
+  nullable = false
 }
 
 variable "vulnerability_alerts" {

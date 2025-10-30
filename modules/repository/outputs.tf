@@ -134,6 +134,20 @@ output "default_branch" {
   value       = one(github_branch_default.this[*].branch)
 }
 
+output "files" {
+  description = "A list of files created in the repository."
+  value = {
+    for path, file in github_repository_file.this :
+    path => {
+      sha = file.sha
+      commit = {
+        message = file.commit_message
+        sha     = file.commit_sha
+      }
+    }
+  }
+}
+
 output "vulnerability_alerts" {
   description = "Whether the security alerts are enabled for vulnerable dpendencies."
   value       = github_repository.this.vulnerability_alerts
