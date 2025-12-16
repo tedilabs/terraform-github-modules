@@ -10,14 +10,14 @@ This module creates following resources.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.12 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | >= 6.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_github"></a> [github](#provider\_github) | 6.2.1 |
+| <a name="provider_github"></a> [github](#provider\_github) | 6.9.0 |
 
 ## Modules
 
