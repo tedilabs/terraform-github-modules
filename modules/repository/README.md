@@ -25,7 +25,7 @@ This module creates following resources.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_github"></a> [github](#provider\_github) | 6.7.3 |
+| <a name="provider_github"></a> [github](#provider\_github) | 6.11.0 |
 
 ## Modules
 

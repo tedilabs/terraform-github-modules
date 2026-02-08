@@ -1,5 +1,6 @@
 # INFO: Not supported attributes
 # - `private`
+# INFO: Deprecated attributes
 # - `has_downloads`
 # INFO: Use a separate resource
 # - `topics`
@@ -68,7 +69,6 @@ resource "github_repository" "this" {
       gitignore_template,
       template,
       topics,
-      has_downloads,
     ]
   }
 }
