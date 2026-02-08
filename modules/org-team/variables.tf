@@ -18,18 +18,18 @@ variable "is_secret" {
   nullable    = false
 }
 
+variable "notification_enabled" {
+  description = "(Optional) Whether to enable notifications for the team. Defaults to `true`."
+  type        = bool
+  default     = true
+  nullable    = false
+}
+
 variable "parent_id" {
   description = "(Optional) The ID of the parent team, if this is a nested team."
   type        = string
   default     = null
   nullable    = true
-}
-
-variable "default_maintainer_enabled" {
-  description = "(Optional) If true, adds the creating user as a default maintainer to the team. Defaults to `false`."
-  type        = bool
-  default     = false
-  nullable    = false
 }
 
 variable "maintainers" {

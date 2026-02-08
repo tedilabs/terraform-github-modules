@@ -28,14 +28,14 @@ output "is_secret" {
   value       = var.is_secret
 }
 
+output "notification_enabled" {
+  description = "Whether notifications are enabled for the team."
+  value       = github_team.this.notification_setting == "notifications_enabled"
+}
+
 output "parent_id" {
   description = "The ID of the parent team."
   value       = github_team.this.parent_team_id
-}
-
-output "default_maintainer_enabled" {
-  description = "Whether to add the creating user as a default maintainer."
-  value       = github_team.this.create_default_maintainer
 }
 
 output "maintainers" {

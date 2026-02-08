@@ -1,14 +1,15 @@
 ###################################################
 # GitHub Organization Team
 ###################################################
-
+# INFO: Deprecated attributes
+# - `create_default_maintainer`
 resource "github_team" "this" {
-  name        = var.name
-  description = var.description
-  privacy     = var.is_secret ? "secret" : "closed"
+  name                 = var.name
+  description          = var.description
+  privacy              = var.is_secret ? "secret" : "closed"
+  notification_setting = var.notification_enabled ? "notifications_enabled" : "notifications_disabled"
 
-  parent_team_id            = var.parent_id
-  create_default_maintainer = var.default_maintainer_enabled
+  parent_team_id = var.parent_id
 
   ldap_dn = var.ldap_group_dn
 }
