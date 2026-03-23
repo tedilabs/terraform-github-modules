@@ -169,3 +169,8 @@ output "pages" {
   description = "The repository's GitHub Pages configuration."
   value       = var.pages
 }
+
+output "environments" {
+  description = "The repository's GitHub Pages configuration."
+  value       = module.environment
+}

@@ -263,3 +263,21 @@ variable "pages" {
   default  = {}
   nullable = false
 }
+
+variable "environments" {
+  description = <<EOF
+  (Optional) A list of environments for the repository. Each item of `environments` block as defined below.
+    (Required) `name` - The name of the environment.
+    (Optional) `wait_timer` - The amount of time in minutes to wait before allowing deployments to proceed. The default value is `0`.
+    (Optional) `allow_admin_to_bypass` - Whether to allow admins to bypass the wait timer and deployment review. The default value is `true`.
+    (Optional) `allows_self_approval` - Whether to allow users to approve their own deployment. The default value is `false`.
+  EOF
+  type = list(object({
+    name                  = string
+    wait_timer            = optional(number, 0)
+    allow_admin_to_bypass = optional(bool, true)
+    allows_self_approval  = optional(bool, false)
+  }))
+  default  = []
+  nullable = false
+}

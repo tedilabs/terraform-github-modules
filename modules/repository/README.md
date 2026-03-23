@@ -25,11 +25,13 @@ This module creates following resources.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_github"></a> [github](#provider\_github) | 6.11.0 |
+| <a name="provider_github"></a> [github](#provider\_github) | 6.11.1 |
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_environment"></a> [environment](#module\_environment) | ../repository-environment | n/a |
 
 ## Resources
 
@@ -62,6 +64,7 @@ No modules.
 | <a name="input_delete_branch_on_merge"></a> [delete\_branch\_on\_merge](#input\_delete\_branch\_on\_merge) | (Optional) Automatically delete head branch after a pull request is merged. Defaults to `true`. | `bool` | `true` | no |
 | <a name="input_deploy_keys"></a> [deploy\_keys](#input\_deploy\_keys) | (Optional) A list of deploy keys to grant access to the repository. A deploy key is a SSH key. Each item of `deploy_keys` block as defined below.<br/>    (Optional) `name` - A name of deploy key.<br/>    (Required) `key` - A SSH key. Begins with 'ssh-rsa', 'ecdsa-sha2-nistp256', 'ecdsa-sha2-nistp384', 'ecdsa-sha2-nistp521', 'ssh-ed25519', 'sk-ecdsa-sha2-nistp256@openssh.com', or 'sk-ssh-ed25519@openssh.com'.<br/>    (Optional) `writable` - Whether to allow write access to the repository. The key can be used to push to the repository if enabled. Defaults to `false`. | <pre>list(object({<br/>    name     = optional(string)<br/>    key      = string<br/>    writable = optional(bool, false)<br/>  }))</pre> | `[]` | no |
 | <a name="input_description"></a> [description](#input\_description) | (Optional) A description of the repository. | `string` | `"Managed by Terraform."` | no |
+| <a name="input_environments"></a> [environments](#input\_environments) | (Optional) A list of environments for the repository. Each item of `environments` block as defined below.<br/>    (Required) `name` - The name of the environment.<br/>    (Optional) `wait_timer` - The amount of time in minutes to wait before allowing deployments to proceed. The default value is `0`.<br/>    (Optional) `allow_admin_to_bypass` - Whether to allow admins to bypass the wait timer and deployment review. The default value is `true`.<br/>    (Optional) `allows_self_approval` - Whether to allow users to approve their own deployment. The default value is `false`. | <pre>list(object({<br/>    name                  = string<br/>    wait_timer            = optional(number, 0)<br/>    allow_admin_to_bypass = optional(bool, true)<br/>    allows_self_approval  = optional(bool, false)<br/>  }))</pre> | `[]` | no |
 | <a name="input_features"></a> [features](#input\_features) | (Optional) A list of enabled features on the repository. Available features: `DISCUSSIONS`, `ISSUES`, `PROJECTS`, `WIKI`. Defaults to `["ISSUES"]` | `set(string)` | <pre>[<br/>  "ISSUES"<br/>]</pre> | no |
 | <a name="input_files"></a> [files](#input\_files) | (Optional) A list of files to create and manage within the repository. Each item of `files` block as defined below.<br/>    (Required) `file` - A `file` block as defined below.<br/>      (Required) `path` - The path of the file to manage.<br/>      (Required) `content` - The file content.<br/>    (Optional) `commit` - A `commit` block as defined below.<br/>      (Optional) `author` - Committer author name to use. NOTE: GitHub app users may omit author and email information so GitHub can verify commits as the GitHub App. This maybe useful when a branch protection rule requires signed commits.<br/>      (Optional) `email` - Committer email address to use. NOTE: GitHub app users may omit author and email information so GitHub can verify commits as the GitHub App. This may be useful when a branch protection rule requires signed commits.<br/>      (Optional) `message` - The commit message when creating, updating or deleting the managed file. Defaults to `chore: managed by Terraform.`.<br/>    (Optional) `overwrite_on_create` - Enable overwriting existing files. If set to true it will overwrite an existing file with the same name. If set to false it will fail if there is an existing file with the same name. Defaults to `true`. | <pre>list(object({<br/>    file = object({<br/>      path    = string<br/>      content = string<br/>    })<br/>    commit = optional(object({<br/>      author  = optional(string)<br/>      email   = optional(string)<br/>      message = optional(string, "chore: managed by Terraform.")<br/>    }), {})<br/>    overwrite_on_create = optional(bool, true)<br/>  }))</pre> | `[]` | no |
 | <a name="input_homepage"></a> [homepage](#input\_homepage) | (Optional) A URL of website describing the repository. | `string` | `""` | no |
@@ -87,6 +90,7 @@ No modules.
 | <a name="output_delete_branch_on_merge"></a> [delete\_branch\_on\_merge](#output\_delete\_branch\_on\_merge) | Automatically delete head branch after a pull request is merged. |
 | <a name="output_deploy_keys"></a> [deploy\_keys](#output\_deploy\_keys) | A map of deploy keys granted access to the repository. |
 | <a name="output_description"></a> [description](#output\_description) | The description of the repository. |
+| <a name="output_environments"></a> [environments](#output\_environments) | The repository's GitHub Pages configuration. |
 | <a name="output_features"></a> [features](#output\_features) | A list of available features on the repository. |
 | <a name="output_files"></a> [files](#output\_files) | A list of files created in the repository. |
 | <a name="output_full_name"></a> [full\_name](#output\_full\_name) | The full name of the repository. A string of the form `orgname/reponame` |
