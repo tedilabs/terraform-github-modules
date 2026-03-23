@@ -11,6 +11,7 @@ Terraform package which manage all of things on GitHub.
 - [org-team](./modules/org-team)
 - [project](./modules/project)
 - [repository](./modules/repository)
+- [repository-environment](./modules/repository-environment)
 - [webhook](./modules/webhook)
 
 

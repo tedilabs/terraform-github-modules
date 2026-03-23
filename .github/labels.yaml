@@ -15,5 +15,8 @@
   description: "This issue or pull request is related to repository module."
   name: ":floppy_disk: repository"
 - color: "fbca04"
+  description: "This issue or pull request is related to repository-environment module."
+  name: ":floppy_disk: repository-environment"
+- color: "fbca04"
   description: "This issue or pull request is related to webhook module."
   name: ":floppy_disk: webhook"

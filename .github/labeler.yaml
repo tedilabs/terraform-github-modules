@@ -24,6 +24,11 @@
   - any-glob-to-any-file:
     - modules/repository/**/*
 
+":floppy_disk: repository-environment":
+- changed-files:
+  - any-glob-to-any-file:
+    - modules/repository-environment/**/*
+
 ":floppy_disk: webhook":
 - changed-files:
   - any-glob-to-any-file:
