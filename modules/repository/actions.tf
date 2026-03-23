@@ -17,4 +17,9 @@ module "environment" {
 
   allow_admin_to_bypass = each.value.allow_admin_to_bypass
   allows_self_approval  = each.value.allows_self_approval
+
+
+  ## Variables & Secrets
+  variables = each.value.variables
+  secrets   = each.value.secrets
 }

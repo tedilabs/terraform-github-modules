@@ -29,6 +29,8 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [github_actions_environment_secret.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_environment_secret) | resource |
+| [github_actions_environment_variable.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_environment_variable) | resource |
 | [github_repository_environment.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_environment) | resource |
 
 ## Inputs
@@ -39,6 +41,8 @@ No modules.
 | <a name="input_repository"></a> [repository](#input\_repository) | (Required) The repository name which the environment belongs to. | `string` | n/a | yes |
 | <a name="input_allow_admin_to_bypass"></a> [allow\_admin\_to\_bypass](#input\_allow\_admin\_to\_bypass) | (Optional) Whether to allow admins to bypass the wait timer and deployment review. The default value is `true`. | `bool` | `true` | no |
 | <a name="input_allows_self_approval"></a> [allows\_self\_approval](#input\_allows\_self\_approval) | (Optional) Whether to allow users to approve their own deployment. The default value is `false`. | `bool` | `false` | no |
+| <a name="input_secrets"></a> [secrets](#input\_secrets) | (Optional) A map of GitHub Actions secrets to set for the environment. Currently, all values will be ignored and treated as placeholders. You should mange the secrets manually in GitHub after the environment is created. Defaults to `{}`. | `map(string)` | `{}` | no |
+| <a name="input_variables"></a> [variables](#input\_variables) | (Optional) A map of GitHub Actions variables to set for the environment. Defaults to `{}`. | `map(string)` | `{}` | no |
 | <a name="input_wait_timer"></a> [wait\_timer](#input\_wait\_timer) | (Optional) The amount of time in minutes to wait before allowing deployments to proceed. The default value is `0`. | `number` | `0` | no |
 
 ## Outputs
@@ -49,5 +53,7 @@ No modules.
 | <a name="output_allows_self_approval"></a> [allows\_self\_approval](#output\_allows\_self\_approval) | Whether to allow users to approve their own deployment. |
 | <a name="output_name"></a> [name](#output\_name) | The name of the environment. |
 | <a name="output_repository"></a> [repository](#output\_repository) | The repository name which the environment belongs to. |
+| <a name="output_secrets"></a> [secrets](#output\_secrets) | A map of GitHub Actions secrets set for the environment. Currently, all values will be placeholders and you should manage the secrets manually in GitHub after the environment is created. |
+| <a name="output_variables"></a> [variables](#output\_variables) | A map of GitHub Actions variables set for the environment. |
 | <a name="output_wait_timer"></a> [wait\_timer](#output\_wait\_timer) | The amount of time in minutes to wait before allowing deployments to proceed. |
 <!-- END_TF_DOCS -->

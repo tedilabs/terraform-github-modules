@@ -30,3 +30,17 @@ variable "allows_self_approval" {
   default     = false
   nullable    = false
 }
+
+variable "variables" {
+  description = "(Optional) A map of GitHub Actions variables to set for the environment. Defaults to `{}`."
+  type        = map(string)
+  default     = {}
+  nullable    = false
+}
+
+variable "secrets" {
+  description = "(Optional) A map of GitHub Actions secrets to set for the environment. Currently, all values will be ignored and treated as placeholders. You should mange the secrets manually in GitHub after the environment is created. Defaults to `{}`."
+  type        = map(string)
+  default     = {}
+  nullable    = false
+}

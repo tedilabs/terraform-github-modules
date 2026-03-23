@@ -23,10 +23,35 @@ output "allows_self_approval" {
   value       = !github_repository_environment.this.prevent_self_review
 }
 
+output "variables" {
+  description = "A map of GitHub Actions variables set for the environment."
+  value = {
+    for name, variable in github_actions_environment_variable.this :
+    name => {
+      value      = variable.value
+      created_at = variable.created_at
+      updated_at = variable.updated_at
+    }
+  }
+}
+
+output "secrets" {
+  description = "A map of GitHub Actions secrets set for the environment. Currently, all values will be placeholders and you should manage the secrets manually in GitHub after the environment is created."
+  value = {
+    for name, secret in github_actions_environment_secret.this :
+    name => {
+      key_id            = secret.key_id
+      created_at        = secret.created_at
+      updated_at        = secret.updated_at
+      remote_updated_at = secret.remote_updated_at
+    }
+  }
+}
+
 # output "debug" {
 #   value = {
 #     for k, v in github_repository_environment.this :
 #     k => v
-#     if !contains(["repository", "environment", "wait_timer", "can_admins_bypass", "prevent_self_review"], k)
+#     if !contains(["repository", "environment", "wait_timer", "can_admins_bypass", "prevent_self_review", "id"], k)
 #   }
 # }
