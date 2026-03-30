@@ -271,6 +271,13 @@ variable "environments" {
     (Optional) `wait_timer` - The amount of time in minutes to wait before allowing deployments to proceed. The default value is `0`.
     (Optional) `allow_admin_to_bypass` - Whether to allow admins to bypass the wait timer and deployment review. The default value is `true`.
     (Optional) `allows_self_approval` - Whether to allow users to approve their own deployment. The default value is `false`.
+    (Optional) `reviewers` - A list of reviewers who may review jobs that reference the environment. Each item of `reviewers` block as defined below.
+      (Required) `type` - The type of the reviewer. Valid values are `USER` or `TEAM`.
+      (Required) `name` - The name of the reviewer. For a user reviewer, the value should be the user's username. For a team reviewer, the value should be the team's slug.
+    (Optional) `deployment_policy` - A configuration for deployment policy of the environment. `deployment_policy` block as defined below.
+      (Optional) `restriction` - The type of deployment restriction. Valid values are `NONE`, `PROTECTED_BRANCH`, or `CUSTOM`. Defaults to `NONE`.
+      (Optional) `branches` - A set of branch name patterns to restrict deployments to when the restriction type is `CUSTOM`.
+      (Optional) `tags` - A set of tag name patterns to restrict deployments to when the restriction type is `CUSTOM`.
     (Optional) `variables` - A map of GitHub Actions variables to set for the environment. Defaults to `{}`.
     (Optional) `secrets` - A map of GitHub Actions secrets to set for the environment. Defaults to `{}`.
   EOF
@@ -279,6 +286,16 @@ variable "environments" {
     wait_timer            = optional(number, 0)
     allow_admin_to_bypass = optional(bool, true)
     allows_self_approval  = optional(bool, false)
+
+    reviewers = optional(list(object({
+      type = string
+      name = string
+    })), [])
+    deployment_policy = optional(object({
+      restriction = optional(string, "NONE")
+      branches    = optional(set(string), [])
+      tags        = optional(set(string), [])
+    }), {})
 
     variables = optional(map(string), {})
     secrets   = optional(map(string), {})

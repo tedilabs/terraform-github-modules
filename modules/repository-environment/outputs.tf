@@ -23,6 +23,33 @@ output "allows_self_approval" {
   value       = !github_repository_environment.this.prevent_self_review
 }
 
+output "reviewers" {
+  description = "A list of reviewers who may review jobs that reference the environment."
+  value = concat(
+    [
+      for team in data.github_team.this :
+      {
+        type = "TEAM"
+        id   = team.id
+        name = team.slug
+      }
+    ],
+    [
+      for user in data.github_user.this :
+      {
+        type = "USER"
+        id   = user.id
+        name = user.username
+      }
+    ]
+  )
+}
+
+output "deployment_policy" {
+  description = "The configuration for deployment policy of the environment."
+  value       = var.deployment_policy
+}
+
 output "variables" {
   description = "A map of GitHub Actions variables set for the environment."
   value = {
