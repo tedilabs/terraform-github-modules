@@ -73,19 +73,29 @@ output "features" {
   value       = var.features
 }
 
-output "merge_strategies" {
-  description = "A list of available strategies for merging pull requests on the repository."
-  value       = var.merge_strategies
-}
-
-output "auto_merge_enabled" {
-  description = "Whether to wait for merge requirements to be met and then merge automatically."
-  value       = github_repository.this.allow_auto_merge
-}
-
-output "delete_branch_on_merge" {
-  description = "Automatically delete head branch after a pull request is merged."
-  value       = github_repository.this.delete_branch_on_merge
+output "pull_request" {
+  description = "The configuration for pull requests on the repository."
+  value = {
+    merge_commit = {
+      enabled = github_repository.this.allow_merge_commit
+      commit = {
+        title   = github_repository.this.merge_commit_title
+        message = github_repository.this.merge_commit_message
+      }
+    }
+    squash_merge = {
+      enabled = github_repository.this.allow_squash_merge
+      commit = {
+        title   = github_repository.this.squash_merge_commit_title
+        message = github_repository.this.squash_merge_commit_message
+      }
+    }
+    rebase_merge = {
+      enabled = github_repository.this.allow_rebase_merge
+    }
+    auto_merge_enabled     = github_repository.this.allow_auto_merge
+    delete_branch_on_merge = github_repository.this.delete_branch_on_merge
+  }
 }
 
 output "topics" {

@@ -83,35 +83,79 @@ variable "features" {
   }
 }
 
-variable "merge_strategies" {
+variable "pull_request" {
   description = <<EOF
-  (Optional) A list of allowed strategies for merging pull requests on the repository. Available strategies: `MERGE_COMMIT`, `SQUASH`, `REBASE`. Defaults to `["SQUASH", "REBASE"]`.
+  (Optional) A configuration for pull requests on the repository. `pull_request` block as defined below.
+    (Optional) `merge_commit` - A configuration for merge commits. `merge_commit` block as defined below.
+      (Optional) `enabled` - Whether to allow merge commits for pull requests. Defaults to `false`.
+      (Optional) `commit` - A configuration for commit title and message. `commit` block as defined below.
+        (Optional) `title` - The default value for a merge commit title. Can be `PR_TITLE` or `MERGE_MESSAGE`. Defaults to `MERGE_MESSAGE`.
+        (Optional) `message` - The default value for a merge commit message. Can be `PR_BODY`, `PR_TITLE`, or `BLANK`. Defaults to `BLANK`.
+    (Optional) `squash_merge` - A configuration for squash merges. `squash_merge` block as defined below.
+      (Optional) `enabled` - Whether to allow squash merges for pull requests. Defaults to `true`.
+      (Optional) `commit` - A configuration for commit title and message. `commit` block as defined below.
+        (Optional) `title` - The default value for a squash merge commit title. Can be `PR_TITLE` or `COMMIT_OR_PR_TITLE`. Defaults to `PR_TITLE`.
+        (Optional) `message` - The default value for a squash merge commit message. Can be `PR_BODY`, `COMMIT_MESSAGES`, or `BLANK`. Defaults to `COMMIT_MESSAGES`.
+    (Optional) `rebase_merge` - A configuration for rebase merges. `rebase_merge` block as defined below.
+      (Optional) `enabled` - Whether to allow rebase merges for pull requests. Defaults to `true`.
+    (Optional) `auto_merge_enabled` - Whether to allow auto-merge on pull requests. Defaults to `false`.
+    (Optional) `delete_branch_on_merge` - Whether to delete head branches when pull requests are merged. Defaults to `true`.
   EOF
-  type        = set(string)
-  default     = ["SQUASH", "REBASE"]
-  nullable    = false
+  type = object({
+    merge_commit = optional(object({
+      enabled = optional(bool, false)
+      commit = optional(object({
+        title   = optional(string, "MERGE_MESSAGE")
+        message = optional(string, "BLANK")
+      }), {})
+    }), {})
+    squash_merge = optional(object({
+      enabled = optional(bool, true)
+      commit = optional(object({
+        title   = optional(string, "PR_TITLE")
+        message = optional(string, "COMMIT_MESSAGES")
+      }), {})
+    }), {})
+    rebase_merge = optional(object({
+      enabled = optional(bool, true)
+    }), {})
+    auto_merge_enabled     = optional(bool, false)
+    delete_branch_on_merge = optional(bool, true)
+  })
+  default  = {}
+  nullable = false
 
   validation {
-    condition = alltrue([
-      for strategy in var.merge_strategies :
-      contains(["MERGE_COMMIT", "SQUASH", "REBASE"], strategy)
-    ])
-    error_message = "Available strategies: `MERGE_COMMIT`, `SQUASH`, `REBASE`."
+    condition = contains(
+      ["PR_TITLE", "MERGE_MESSAGE"],
+      var.pull_request.merge_commit.commit.title
+    )
+    error_message = "Valid values for `pull_request.merge_commit.commit.title` are `PR_TITLE`, `MERGE_MESSAGE`."
   }
-}
 
-variable "auto_merge_enabled" {
-  description = "(Optional) Whether to wait for merge requirements to be met and then merge automatically. Defaults to `false`."
-  type        = bool
-  default     = false
-  nullable    = false
-}
+  validation {
+    condition = contains(
+      ["PR_BODY", "PR_TITLE", "BLANK"],
+      var.pull_request.merge_commit.commit.message
+    )
+    error_message = "Valid values for `pull_request.merge_commit.commit.message` are `PR_BODY`, `PR_TITLE`, `BLANK`."
+  }
 
-variable "delete_branch_on_merge" {
-  description = "(Optional) Automatically delete head branch after a pull request is merged. Defaults to `true`."
-  type        = bool
-  default     = true
-  nullable    = false
+  validation {
+    condition = contains(
+      ["PR_TITLE", "COMMIT_OR_PR_TITLE"],
+      var.pull_request.squash_merge.commit.title
+    )
+    error_message = "Valid values for `pull_request.squash_merge.commit.title` are `PR_TITLE`, `COMMIT_OR_PR_TITLE`."
+  }
+
+  validation {
+    condition = contains(
+      ["PR_BODY", "COMMIT_MESSAGES", "BLANK"],
+      var.pull_request.squash_merge.commit.message
+    )
+    error_message = "Valid values for `pull_request.squash_merge.commit.message` are `PR_BODY`, `COMMIT_MESSAGES`, `BLANK`."
+  }
 }
 
 variable "topics" {

@@ -14,6 +14,8 @@ resource "github_repository" "this" {
   archived           = var.archived
   archive_on_destroy = var.archive_on_destroy
 
+  vulnerability_alerts = var.vulnerability_alerts
+
 
   ## Template
   is_template = var.is_template
@@ -40,13 +42,30 @@ resource "github_repository" "this" {
 
 
   ## Pull Request
-  allow_merge_commit = contains(var.merge_strategies, "MERGE_COMMIT")
-  allow_squash_merge = contains(var.merge_strategies, "SQUASH")
-  allow_rebase_merge = contains(var.merge_strategies, "REBASE")
+  allow_merge_commit = var.pull_request.merge_commit.enabled
+  merge_commit_title = (var.pull_request.merge_commit.enabled
+    ? var.pull_request.merge_commit.commit.title
+    : null
+  )
+  merge_commit_message = (var.pull_request.merge_commit.enabled
+    ? var.pull_request.merge_commit.commit.message
+    : null
+  )
 
-  allow_auto_merge       = var.auto_merge_enabled
-  delete_branch_on_merge = var.delete_branch_on_merge
-  vulnerability_alerts   = var.vulnerability_alerts
+  allow_squash_merge = var.pull_request.squash_merge.enabled
+  squash_merge_commit_title = (var.pull_request.squash_merge.enabled
+    ? var.pull_request.squash_merge.commit.title
+    : null
+  )
+  squash_merge_commit_message = (var.pull_request.squash_merge.enabled
+    ? var.pull_request.squash_merge.commit.message
+    : null
+  )
+
+  allow_rebase_merge = var.pull_request.rebase_merge.enabled
+
+  allow_auto_merge       = var.pull_request.auto_merge_enabled
+  delete_branch_on_merge = var.pull_request.delete_branch_on_merge
 
 
   ## Pages
