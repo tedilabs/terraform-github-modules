@@ -16,7 +16,7 @@ module "environment" {
   wait_timer = each.value.wait_timer
 
   allow_admin_to_bypass = each.value.allow_admin_to_bypass
-  allows_self_approval  = each.value.allows_self_approval
+  allow_self_approval   = each.value.allow_self_approval
 
   reviewers = [
     for reviewer in each.value.reviewers :

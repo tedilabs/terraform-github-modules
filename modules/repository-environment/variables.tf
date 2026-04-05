@@ -24,7 +24,7 @@ variable "allow_admin_to_bypass" {
   nullable    = false
 }
 
-variable "allows_self_approval" {
+variable "allow_self_approval" {
   description = "(Optional) Whether to allow users to approve their own deployment. The default value is `false`."
   type        = bool
   default     = false

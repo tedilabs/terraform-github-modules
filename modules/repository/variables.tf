@@ -314,7 +314,7 @@ variable "environments" {
     (Required) `name` - The name of the environment.
     (Optional) `wait_timer` - The amount of time in minutes to wait before allowing deployments to proceed. The default value is `0`.
     (Optional) `allow_admin_to_bypass` - Whether to allow admins to bypass the wait timer and deployment review. The default value is `true`.
-    (Optional) `allows_self_approval` - Whether to allow users to approve their own deployment. The default value is `false`.
+    (Optional) `allow_self_approval` - Whether to allow users to approve their own deployment. The default value is `false`.
     (Optional) `reviewers` - A list of reviewers who may review jobs that reference the environment. Each item of `reviewers` block as defined below.
       (Required) `type` - The type of the reviewer. Valid values are `USER` or `TEAM`.
       (Required) `name` - The name of the reviewer. For a user reviewer, the value should be the user's username. For a team reviewer, the value should be the team's slug.
@@ -329,7 +329,7 @@ variable "environments" {
     name                  = string
     wait_timer            = optional(number, 0)
     allow_admin_to_bypass = optional(bool, true)
-    allows_self_approval  = optional(bool, false)
+    allow_self_approval   = optional(bool, false)
 
     reviewers = optional(list(object({
       type = string

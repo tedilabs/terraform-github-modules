@@ -18,7 +18,7 @@ output "allow_admin_to_bypass" {
   value       = github_repository_environment.this.can_admins_bypass
 }
 
-output "allows_self_approval" {
+output "allow_self_approval" {
   description = "Whether to allow users to approve their own deployment."
   value       = !github_repository_environment.this.prevent_self_review
 }
