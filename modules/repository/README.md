@@ -5,6 +5,7 @@ This module creates following resources.
 - `github_repository`
 - `github_repository_collaborator` (optional)
 - `github_repository_collaborators` (optional)
+- `github_repository_custom_property` (optional)
 - `github_repository_file` (optional)
 - `github_team_repository` (optional)
 - `github_repository_autolink_reference` (optional)
@@ -44,6 +45,7 @@ This module creates following resources.
 | [github_repository_autolink_reference.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_autolink_reference) | resource |
 | [github_repository_collaborator.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_collaborator) | resource |
 | [github_repository_collaborators.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_collaborators) | resource |
+| [github_repository_custom_property.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_custom_property) | resource |
 | [github_repository_deploy_key.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_deploy_key) | resource |
 | [github_repository_file.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_file) | resource |
 | [github_repository_topics.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_topics) | resource |
@@ -59,6 +61,7 @@ This module creates following resources.
 | <a name="input_archived"></a> [archived](#input\_archived) | (Optional) Specify if the repository should be archived. Defaults to `false`. NOTE: Currently, the API does not support unarchiving. | `bool` | `false` | no |
 | <a name="input_autolink_references"></a> [autolink\_references](#input\_autolink\_references) | (Optional) A list of autolink references for the repository. Each item of `autolink_references` block as defined below.<br/>    (Required) `key_prefix` - This prefix appended by a string will generate a link any time it is found in an issue, pull request, or commit.<br/>    (Required) `target_url_template` - The URL must contain <num> for the reference number.<br/>    (Optional) `is_alphanumeric` - Whether this autolink reference matches alphanumeric characters. If false, this autolink reference only matches numeric characters. Defaults to `false`. | <pre>set(object({<br/>    key_prefix          = string<br/>    target_url_template = string<br/>    is_alphanumeric     = optional(bool, false)<br/>  }))</pre> | `[]` | no |
 | <a name="input_branches"></a> [branches](#input\_branches) | (Optional) A list of branches to create and manage within the repository. | `set(string)` | `[]` | no |
+| <a name="input_custom_properties"></a> [custom\_properties](#input\_custom\_properties) | (Optional) A map of custom properties to set for the repository. The key of the map is the name of the custom property. The value of `custom_properties` map as defined below.<br/>    (Required) `type` - The type of the custom property. Can be one of `STRING`, `SINGLE_SELECT`, `MULTI_SELECT`, or `BOOL`.<br/>    (Required) `value` - The value of the custom property. For `STRING` type, the value should be a list with one string item. For `SINGLE_SELECT` type, the value should be a list with one string item and the value must be one of the allowed values defined in the organization-level custom property with the same name. For `MULTI_SELECT` type, the value can be a list of string items and each value must be one of the allowed values defined in the organization-level custom property with the same name. For `BOOL` type, the value should be a list with one string item and the value must be either `true` or `false`. | <pre>map(object({<br/>    type  = string<br/>    value = list(string)<br/>  }))</pre> | `{}` | no |
 | <a name="input_default_branch"></a> [default\_branch](#input\_default\_branch) | (Optional) Set the default branch for the repository. Default is `main` branch. | `string` | `"main"` | no |
 | <a name="input_deploy_keys"></a> [deploy\_keys](#input\_deploy\_keys) | (Optional) A list of deploy keys to grant access to the repository. A deploy key is a SSH key. Each item of `deploy_keys` block as defined below.<br/>    (Optional) `name` - A name of deploy key.<br/>    (Required) `key` - A SSH key. Begins with 'ssh-rsa', 'ecdsa-sha2-nistp256', 'ecdsa-sha2-nistp384', 'ecdsa-sha2-nistp521', 'ssh-ed25519', 'sk-ecdsa-sha2-nistp256@openssh.com', or 'sk-ssh-ed25519@openssh.com'.<br/>    (Optional) `writable` - Whether to allow write access to the repository. The key can be used to push to the repository if enabled. Defaults to `false`. | <pre>list(object({<br/>    name     = optional(string)<br/>    key      = string<br/>    writable = optional(bool, false)<br/>  }))</pre> | `[]` | no |
 | <a name="input_description"></a> [description](#input\_description) | (Optional) A description of the repository. | `string` | `"Managed by Terraform."` | no |
@@ -83,6 +86,7 @@ This module creates following resources.
 | <a name="output_archived"></a> [archived](#output\_archived) | Whether the repository is archived. |
 | <a name="output_autolink_references"></a> [autolink\_references](#output\_autolink\_references) | A list of autolink references for the repository. |
 | <a name="output_branches"></a> [branches](#output\_branches) | A list of the repository branches excluding initial branch. |
+| <a name="output_custom_properties"></a> [custom\_properties](#output\_custom\_properties) | A map of custom properties defined for the repository. |
 | <a name="output_default_branch"></a> [default\_branch](#output\_default\_branch) | The default branch of the repository. |
 | <a name="output_deploy_keys"></a> [deploy\_keys](#output\_deploy\_keys) | A map of deploy keys granted access to the repository. |
 | <a name="output_description"></a> [description](#output\_description) | The description of the repository. |

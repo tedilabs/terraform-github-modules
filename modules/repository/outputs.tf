@@ -144,6 +144,18 @@ output "default_branch" {
   value       = one(github_branch_default.this[*].branch)
 }
 
+output "custom_properties" {
+  description = "A map of custom properties defined for the repository."
+  value = {
+    for name, property in github_repository_custom_property.this :
+    name => {
+      name  = property.property_name
+      type  = property.property_type
+      value = property.property_value
+    }
+  }
+}
+
 output "files" {
   description = "A list of files created in the repository."
   value = {

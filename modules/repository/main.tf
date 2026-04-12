@@ -1,3 +1,17 @@
+locals {
+  custom_property_value_types = {
+    "STRING"        = "string"
+    "SINGLE_SELECT" = "single_select"
+    "MULTI_SELECT"  = "multi_select"
+    "BOOL"          = "true_false"
+  }
+}
+
+
+###################################################
+# GitHub Repository
+###################################################
+
 # INFO: Not supported attributes
 # - `private`
 # INFO: Deprecated attributes
@@ -90,6 +104,24 @@ resource "github_repository" "this" {
       topics,
     ]
   }
+}
+
+
+###################################################
+# Custom Properties for GitHub Repository
+###################################################
+
+resource "github_repository_custom_property" "this" {
+  for_each = {
+    for name, property in var.custom_properties :
+    name => property
+  }
+
+  repository = github_repository.this.name
+
+  property_name  = each.key
+  property_type  = local.custom_property_value_types[each.value.type]
+  property_value = each.value.value
 }
 
 

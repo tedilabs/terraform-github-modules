@@ -236,6 +236,46 @@ variable "default_branch" {
   default     = "main"
 }
 
+variable "custom_properties" {
+  description = <<EOF
+  (Optional) A map of custom properties to set for the repository. The key of the map is the name of the custom property. The value of `custom_properties` map as defined below.
+    (Required) `type` - The type of the custom property. Can be one of `STRING`, `SINGLE_SELECT`, `MULTI_SELECT`, or `BOOL`.
+    (Required) `value` - The value of the custom property. For `STRING` type, the value should be a list with one string item. For `SINGLE_SELECT` type, the value should be a list with one string item and the value must be one of the allowed values defined in the organization-level custom property with the same name. For `MULTI_SELECT` type, the value can be a list of string items and each value must be one of the allowed values defined in the organization-level custom property with the same name. For `BOOL` type, the value should be a list with one string item and the value must be either `true` or `false`.
+  EOF
+  type = map(object({
+    type  = string
+    value = list(string)
+  }))
+  default  = {}
+  nullable = false
+
+  validation {
+    condition = alltrue([
+      for property in var.custom_properties :
+      contains(["STRING", "SINGLE_SELECT", "MULTI_SELECT", "BOOL"], property.type)
+    ])
+    error_message = "Valid values for `type` are `STRING`, `SINGLE_SELECT`, `MULTI_SELECT`, `BOOL`."
+  }
+  validation {
+    condition = alltrue([
+      for property in var.custom_properties :
+      length(property.value) == 1
+      if contains(["STRING", "SINGLE_SELECT", "BOOL"], property.type)
+    ])
+    error_message = "For `STRING`, `SINGLE_SELECT`, and `BOOL` types, the value must be a list with one string item."
+  }
+  validation {
+    condition = alltrue([
+      for property in var.custom_properties :
+      anytrue([
+        property.type != "BOOL",
+        (property.type == "BOOL" && contains(["true", "false"], property.value[0]))
+      ])
+    ])
+    error_message = "For `BOOL` type, the value must be either `true` or `false`."
+  }
+}
+
 variable "files" {
   description = <<EOF
   (Optional) A list of files to create and manage within the repository. Each item of `files` block as defined below.
