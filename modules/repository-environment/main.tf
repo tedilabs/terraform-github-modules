@@ -92,18 +92,21 @@ resource "github_actions_environment_variable" "this" {
 # Secrets for Repository Environment
 ###################################################
 
+# INFO: Deprecated attributes
+# - `plaintext_value`
+# - `encrypted_value`
 resource "github_actions_environment_secret" "this" {
   for_each = var.secrets
 
   repository  = var.repository
   environment = github_repository_environment.this.environment
 
-  secret_name     = each.key
-  plaintext_value = "placeholder"
+  secret_name = each.key
+  value       = "placeholder"
   # key_id          = var.key_id
-  # encrypted_value = each.value
+  # value_encrypted = each.value
 
   lifecycle {
-    ignore_changes = [plaintext_value]
+    ignore_changes = [value]
   }
 }
