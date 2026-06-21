@@ -3,6 +3,7 @@
 This module creates following resources.
 
 - `github_repository`
+- `github_repository_vulnerability_alerts`
 - `github_repository_collaborator` (optional)
 - `github_repository_collaborators` (optional)
 - `github_repository_custom_property` (optional)
@@ -49,6 +50,7 @@ This module creates following resources.
 | [github_repository_deploy_key.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_deploy_key) | resource |
 | [github_repository_file.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_file) | resource |
 | [github_repository_topics.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_topics) | resource |
+| [github_repository_vulnerability_alerts.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_vulnerability_alerts) | resource |
 | [github_team_repository.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_repository) | resource |
 
 ## Inputs

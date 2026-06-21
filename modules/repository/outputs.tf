@@ -172,7 +172,7 @@ output "files" {
 
 output "vulnerability_alerts" {
   description = "Whether the security alerts are enabled for vulnerable dpendencies."
-  value       = github_repository.this.vulnerability_alerts
+  value       = github_repository_vulnerability_alerts.this.enabled
 }
 
 output "deploy_keys" {

@@ -19,6 +19,7 @@ locals {
 # INFO: Use a separate resource
 # - `topics`
 # - `default_branch`
+# - `vulnerability_alerts`
 resource "github_repository" "this" {
   name         = var.name
   description  = var.description
@@ -27,8 +28,6 @@ resource "github_repository" "this" {
   visibility         = var.visibility
   archived           = var.archived
   archive_on_destroy = var.archive_on_destroy
-
-  vulnerability_alerts = var.vulnerability_alerts
 
 
   ## Template
@@ -104,6 +103,16 @@ resource "github_repository" "this" {
       topics,
     ]
   }
+}
+
+
+###################################################
+# Vulnerability Alerts for GitHub Repository
+###################################################
+
+resource "github_repository_vulnerability_alerts" "this" {
+  repository = github_repository.this.name
+  enabled    = var.vulnerability_alerts
 }
 
 
