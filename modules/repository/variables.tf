@@ -68,7 +68,7 @@ variable "template" {
 
 variable "features" {
   description = <<EOF
-  (Optional) A list of enabled features on the repository. Available features: `DISCUSSIONS`, `ISSUES`, `PROJECTS`, `WIKI`. Defaults to `["ISSUES"]`
+  (Optional) A list of enabled features on the repository. Available features: `DEPENDABOT_ALERTS`, `DISCUSSIONS`, `ISSUES`, `PROJECTS`, `WIKI`. `DEPENDABOT_ALERTS` enables Dependabot alerts for vulnerable dependencies. Defaults to `["ISSUES"]`
   EOF
   type        = set(string)
   default     = ["ISSUES"]
@@ -77,9 +77,9 @@ variable "features" {
   validation {
     condition = alltrue([
       for feature in var.features :
-      contains(["DISCUSSIONS", "ISSUES", "PROJECTS", "WIKI"], feature)
+      contains(["DEPENDABOT_ALERTS", "DISCUSSIONS", "ISSUES", "PROJECTS", "WIKI"], feature)
     ])
-    error_message = "Available features: `DISCUSSIONS`, `ISSUES`, `PROJECTS`, `WIKI`."
+    error_message = "Available features: `DEPENDABOT_ALERTS`, `DISCUSSIONS`, `ISSUES`, `PROJECTS`, `WIKI`."
   }
 }
 
@@ -302,13 +302,6 @@ variable "files" {
   }))
   default  = []
   nullable = false
-}
-
-variable "vulnerability_alerts" {
-  description = "(Optional) Set to true to enable security alerts for vulnerable dependencies. Enabling requires alerts to be enabled on the owner level. GitHub enables the alerts on public repos but disables them on private repos by default."
-  type        = bool
-  default     = false
-  nullable    = false
 }
 
 variable "deploy_keys" {
