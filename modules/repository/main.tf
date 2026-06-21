@@ -112,7 +112,7 @@ resource "github_repository" "this" {
 
 resource "github_repository_vulnerability_alerts" "this" {
   repository = github_repository.this.name
-  enabled    = var.vulnerability_alerts
+  enabled    = contains(var.features, "DEPENDABOT_ALERTS")
 }
 
 
