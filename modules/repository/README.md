@@ -110,5 +110,4 @@ This module creates following resources.
 | <a name="output_topics"></a> [topics](#output\_topics) | A list of topics for the repository. |
 | <a name="output_url"></a> [url](#output\_url) | The URL of the repository. |
 | <a name="output_visibility"></a> [visibility](#output\_visibility) | The visibility of the repository. Can be `public`, `private` or `internal`. |
-| <a name="output_vulnerability_alerts"></a> [vulnerability\_alerts](#output\_vulnerability\_alerts) | Whether the security alerts are enabled for vulnerable dpendencies. |
 <!-- END_TF_DOCS -->
