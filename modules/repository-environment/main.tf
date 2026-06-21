@@ -98,12 +98,12 @@ resource "github_actions_environment_secret" "this" {
   repository  = var.repository
   environment = github_repository_environment.this.environment
 
-  secret_name     = each.key
-  plaintext_value = "placeholder"
+  secret_name = each.key
+  value       = "placeholder"
   # key_id          = var.key_id
-  # encrypted_value = each.value
+  # value_encrypted = each.value
 
   lifecycle {
-    ignore_changes = [plaintext_value]
+    ignore_changes = [value]
   }
 }
