@@ -92,6 +92,9 @@ resource "github_actions_environment_variable" "this" {
 # Secrets for Repository Environment
 ###################################################
 
+# INFO: Deprecated attributes
+# - `plaintext_value`
+# - `encrypted_value`
 resource "github_actions_environment_secret" "this" {
   for_each = var.secrets
 
