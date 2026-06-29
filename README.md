@@ -8,6 +8,7 @@ Terraform package which manage all of things on GitHub.
 
 - [enterprise-organization](./modules/enterprise-organization)
 - [org-organization](./modules/org-organization)
+- [org-ruleset](./modules/org-ruleset)
 - [org-team](./modules/org-team)
 - [project](./modules/project)
 - [repository](./modules/repository)

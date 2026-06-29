@@ -9,6 +9,11 @@
   - any-glob-to-any-file:
     - modules/org-organization/**/*
 
+":floppy_disk: org-ruleset":
+- changed-files:
+  - any-glob-to-any-file:
+    - modules/org-ruleset/**/*
+
 ":floppy_disk: org-team":
 - changed-files:
   - any-glob-to-any-file:
