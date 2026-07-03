@@ -37,9 +37,13 @@ resource "github_repository_environment" "this" {
     users = values(data.github_user.this)[*].id
   }
 
-  deployment_branch_policy {
-    protected_branches     = var.deployment_policy.restriction == "PROTECTED_BRANCHES"
-    custom_branch_policies = var.deployment_policy.restriction == "CUSTOM"
+  dynamic "deployment_branch_policy" {
+    for_each = var.deployment_policy.restriction != "NONE" ? ["go"] : []
+
+    content {
+      protected_branches     = var.deployment_policy.restriction == "PROTECTED_BRANCHES"
+      custom_branch_policies = var.deployment_policy.restriction == "CUSTOM"
+    }
   }
 }
 
