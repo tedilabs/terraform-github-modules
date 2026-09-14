@@ -19,26 +19,26 @@ This module creates following resources.
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | >= 6.2 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
-| <a name="provider_github"></a> [github](#provider\_github) | 6.11.1 |
+| ---- | ------- |
+| <a name="provider_github"></a> [github](#provider\_github) | >= 6.2 |
 
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_environment"></a> [environment](#module\_environment) | ../repository-environment | n/a |
 
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [github_branch.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/branch) | resource |
 | [github_branch_default.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/branch_default) | resource |
 | [github_issue_label.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/issue_label) | resource |
@@ -56,7 +56,7 @@ This module creates following resources.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_name"></a> [name](#input\_name) | (Required) A name of the repository. | `string` | n/a | yes |
 | <a name="input_access"></a> [access](#input\_access) | (Optional) A configuration for the repository access. `access` block as defined below.<br/>    (Optional) `collaborators` - A list of collaborators to the repository. Each item of `collaborators` block as defined below.<br/>      (Required) `username` - The GitHub username to add to the repository as a collaborator.<br/>      (Optional) `role` - The role to grant the collaborator in the repository. Valid values are `read`, `triage`, `write`, `maintain`, `admin` or the name of an existing custom repository role within the organisation. Default is `write`.<br/>    (Optional) `teams` - A list of teams to the repository. Each item of `teams` block as defined below.<br/>      (Required) `team` - The GitHub team id or the GitHub team slug.<br/>      (Optional) `role` - The role to grant the team in the repository. Valid values are `read`, `triage`, `write`, `maintain`, `admin` or the name of an existing custom repository role within the organisation. Default is `read`.<br/>    (Optional) `sync_enabled` - Whether to sync the repository access. Accesses added outside of the Terraform code will be removed. Defaults to `false`. | <pre>object({<br/>    collaborators = optional(list(object({<br/>      username = string<br/>      role     = optional(string, "write")<br/>    })), [])<br/>    teams = optional(list(object({<br/>      team = string<br/>      role = optional(string, "read")<br/>    })), [])<br/>    sync_enabled = optional(bool, false)<br/>  })</pre> | `{}` | no |
 | <a name="input_archive_on_destroy"></a> [archive\_on\_destroy](#input\_archive\_on\_destroy) | (Optional) Whether to archive the repository instead of deleting on destroy. Defaults to `false`. | `bool` | `false` | no |
@@ -82,7 +82,7 @@ This module creates following resources.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_access"></a> [access](#output\_access) | The configuration for the repository access. |
 | <a name="output_archived"></a> [archived](#output\_archived) | Whether the repository is archived. |
 | <a name="output_autolink_references"></a> [autolink\_references](#output\_autolink\_references) | A list of autolink references for the repository. |

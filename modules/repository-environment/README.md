@@ -11,15 +11,15 @@ This module creates following resources.
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.12 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | >= 6.11 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
-| <a name="provider_github"></a> [github](#provider\_github) | 6.11.1 |
+| ---- | ------- |
+| <a name="provider_github"></a> [github](#provider\_github) | >= 6.11 |
 
 ## Modules
 
@@ -28,7 +28,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [github_actions_environment_secret.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_environment_secret) | resource |
 | [github_actions_environment_variable.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_environment_variable) | resource |
 | [github_repository_environment.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_environment) | resource |
@@ -40,7 +40,7 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_name"></a> [name](#input\_name) | (Required) The name of the environment. | `string` | n/a | yes |
 | <a name="input_repository"></a> [repository](#input\_repository) | (Required) The repository name which the environment belongs to. | `string` | n/a | yes |
 | <a name="input_allow_admin_to_bypass"></a> [allow\_admin\_to\_bypass](#input\_allow\_admin\_to\_bypass) | (Optional) Whether to allow admins to bypass the wait timer and deployment review. The default value is `true`. | `bool` | `true` | no |
@@ -54,7 +54,7 @@ No modules.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_allow_admin_to_bypass"></a> [allow\_admin\_to\_bypass](#output\_allow\_admin\_to\_bypass) | Whether to allow admins to bypass the wait timer and deployment review. |
 | <a name="output_allow_self_approval"></a> [allow\_self\_approval](#output\_allow\_self\_approval) | Whether to allow users to approve their own deployment. |
 | <a name="output_deployment_policy"></a> [deployment\_policy](#output\_deployment\_policy) | The configuration for deployment policy of the environment. |

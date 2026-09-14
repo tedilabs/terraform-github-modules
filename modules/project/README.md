@@ -10,15 +10,15 @@ This module creates following resources.
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | >= 6.2 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
-| <a name="provider_github"></a> [github](#provider\_github) | 6.2.2 |
+| ---- | ------- |
+| <a name="provider_github"></a> [github](#provider\_github) | >= 6.2 |
 
 ## Modules
 
@@ -27,7 +27,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [github_organization_project.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/organization_project) | resource |
 | [github_project_column.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/project_column) | resource |
 | [github_repository_project.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_project) | resource |
@@ -35,7 +35,7 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_name"></a> [name](#input\_name) | (Required) The name of the project. | `string` | n/a | yes |
 | <a name="input_columns"></a> [columns](#input\_columns) | (Optional) A list of columns for the project. | `set(string)` | `[]` | no |
 | <a name="input_description"></a> [description](#input\_description) | (Optional) A description of the project. | `string` | `"Managed by Terraform."` | no |
@@ -45,7 +45,7 @@ No modules.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_columns"></a> [columns](#output\_columns) | A list of columns of the project. |
 | <a name="output_description"></a> [description](#output\_description) | The description of the team. |
 | <a name="output_id"></a> [id](#output\_id) | The ID of the project. |
