@@ -8,15 +8,15 @@ This module creates following resources.
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.12 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | >= 6.11 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
-| <a name="provider_github"></a> [github](#provider\_github) | 6.11.1 |
+| ---- | ------- |
+| <a name="provider_github"></a> [github](#provider\_github) | >= 6.11 |
 
 ## Modules
 
@@ -25,13 +25,13 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [github_organization_custom_properties.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/organization_custom_properties) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_name"></a> [name](#input\_name) | (Required) The name of the custom property. | `string` | n/a | yes |
 | <a name="input_allowed_values"></a> [allowed\_values](#input\_allowed\_values) | (Optional) A set of allowed values for the custom property. This is required if the `type` is `SINGLE_SELECT` or `MULTI_SELECT`. | `set(string)` | `[]` | no |
 | <a name="input_default"></a> [default](#input\_default) | (Optional) The default value of the custom property. | `any` | `null` | no |
@@ -43,7 +43,7 @@ No modules.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_allowed_values"></a> [allowed\_values](#output\_allowed\_values) | A set of allowed values for the custom property. |
 | <a name="output_default"></a> [default](#output\_default) | The default value of the custom property. |
 | <a name="output_description"></a> [description](#output\_description) | The description of the custom property. |

@@ -9,15 +9,15 @@ This module creates following resources.
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.12 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | >= 6.2 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
-| <a name="provider_github"></a> [github](#provider\_github) | 6.9.0 |
+| ---- | ------- |
+| <a name="provider_github"></a> [github](#provider\_github) | >= 6.2 |
 
 ## Modules
 
@@ -26,14 +26,14 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [github_enterprise_organization.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/enterprise_organization) | resource |
 | [github_enterprise.this](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/enterprise) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_billing_email"></a> [billing\_email](#input\_billing\_email) | (Required) The billing email address. | `string` | n/a | yes |
 | <a name="input_enterprise"></a> [enterprise](#input\_enterprise) | (Required) The name (slug) of the enterprise. | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | (Required) The name of the organization. | `string` | n/a | yes |
@@ -44,7 +44,7 @@ No modules.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_billing_email"></a> [billing\_email](#output\_billing\_email) | The billing email address. |
 | <a name="output_database_id"></a> [database\_id](#output\_database\_id) | The database ID of the organization. |
 | <a name="output_description"></a> [description](#output\_description) | The description of the organization. |

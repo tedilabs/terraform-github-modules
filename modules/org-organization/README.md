@@ -10,15 +10,15 @@ This module creates following resources.
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | >= 6.2 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
-| <a name="provider_github"></a> [github](#provider\_github) | 6.2.3 |
+| ---- | ------- |
+| <a name="provider_github"></a> [github](#provider\_github) | >= 6.2 |
 
 ## Modules
 
@@ -27,7 +27,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [github_membership.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/membership) | resource |
 | [github_organization_block.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/organization_block) | resource |
 | [github_organization_security_manager.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/organization_security_manager) | resource |
@@ -37,7 +37,7 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_name"></a> [name](#input\_name) | (Required) The name of the organization. | `string` | n/a | yes |
 | <a name="input_blocked_users"></a> [blocked\_users](#input\_blocked\_users) | (Optional) A list of usernames to block from organization. | `set(string)` | `[]` | no |
 | <a name="input_members"></a> [members](#input\_members) | (Optional) A list of usernames to add users as `member` role. When applied, an invitation will be sent to the user to become a member of the organization. | `set(string)` | `[]` | no |
@@ -47,7 +47,7 @@ No modules.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_blocked_users"></a> [blocked\_users](#output\_blocked\_users) | A list of blocked usernames from organization. |
 | <a name="output_description"></a> [description](#output\_description) | The description of the organization. |
 | <a name="output_display_name"></a> [display\_name](#output\_display\_name) | The display name of the organization. |
