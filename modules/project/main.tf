@@ -1,3 +1,13 @@
+locals {
+  metadata = {
+    package = "terraform-github-modules"
+    version = trimspace(file("${path.module}/../../VERSION"))
+    module  = basename(path.module)
+    name    = var.name
+  }
+}
+
+
 resource "github_organization_project" "this" {
   count = var.level == "ORGANIZATION" ? 1 : 0
 
