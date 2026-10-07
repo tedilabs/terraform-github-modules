@@ -1,3 +1,13 @@
+locals {
+  metadata = {
+    package = "terraform-github-modules"
+    version = trimspace(file("${path.module}/../../VERSION"))
+    module  = basename(path.module)
+    name    = var.name
+  }
+}
+
+
 data "github_team" "this" {
   for_each = toset([
     for reviewer in var.reviewers :
