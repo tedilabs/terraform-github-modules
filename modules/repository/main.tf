@@ -1,4 +1,11 @@
 locals {
+  metadata = {
+    package = "terraform-github-modules"
+    version = trimspace(file("${path.module}/../../VERSION"))
+    module  = basename(path.module)
+    name    = var.name
+  }
+
   custom_property_value_types = {
     "STRING"        = "string"
     "SINGLE_SELECT" = "single_select"
