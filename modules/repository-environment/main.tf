@@ -3,7 +3,7 @@ locals {
     package = "terraform-github-modules"
     version = trimspace(file("${path.module}/../../VERSION"))
     module  = basename(path.module)
-    name    = var.name
+    name    = "${var.repository}/${var.name}"
   }
 }
 
