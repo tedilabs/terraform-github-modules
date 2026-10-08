@@ -6,5 +6,9 @@ terraform {
       source  = "integrations/github"
       version = ">= 6.11"
     }
+    telemetry = {
+      source  = "tedilabs/telemetry"
+      version = ">= 0.1.1"
+    }
   }
 }
