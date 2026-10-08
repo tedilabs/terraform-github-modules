@@ -1,4 +1,11 @@
 locals {
+  metadata = {
+    package = "terraform-github-modules"
+    version = trimspace(file("${path.module}/../../VERSION"))
+    module  = basename(path.module)
+    name    = null
+  }
+
   is_organization = contains(var.repositories, "*")
   repositories    = local.is_organization ? [] : var.repositories
 }
