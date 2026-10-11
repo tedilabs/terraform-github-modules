@@ -35,4 +35,8 @@ module "environment" {
   ## Variables & Secrets
   variables = each.value.variables
   secrets   = each.value.secrets
+
+  telemetry = {
+    enabled = false
+  }
 }
