@@ -21,14 +21,14 @@ This module creates following resources.
 | Name | Version |
 | ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.12 |
-| <a name="requirement_github"></a> [github](#requirement\_github) | >= 6.2 |
+| <a name="requirement_github"></a> [github](#requirement\_github) | >= 6.12 |
 | <a name="requirement_telemetry"></a> [telemetry](#requirement\_telemetry) | >= 0.2.0 |
 
 ## Providers
 
 | Name | Version |
 | ---- | ------- |
-| <a name="provider_github"></a> [github](#provider\_github) | >= 6.2 |
+| <a name="provider_github"></a> [github](#provider\_github) | >= 6.12 |
 
 ## Modules
 
