@@ -33,7 +33,7 @@ variable "bypass_list" {
   (Optional) A list of actors that are allowed to bypass the rules of the ruleset. Each item of `bypass_list` block as defined below.
     (Required) `actor` - A configuration for the actor that can bypass the ruleset. `actor` block as defined below.
       (Required) `type` - The type of actor that can bypass the ruleset. Can be one of `RepositoryRole`, `Team`, `Integration`, `OrganizationAdmin`, or `DeployKey`.
-      (Optional) `id` - The ID of the actor that can bypass the ruleset. When `type` is `OrganizationAdmin`, this should be `1`. For repository roles, use `1` (maintain), `2` (write), `3` (admin), `4` (read), or `5` (triage).
+      (Optional) `id` - The ID of the actor that can bypass the ruleset. When `type` is `OrganizationAdmin`, this should be `1`. For repository roles, use `2` (maintain), `4` (write), or `5` (admin).
     (Optional) `mode` - The mode by which the actor can bypass the ruleset. Can be one of `always` or `pull_request`. Defaults to `always`.
   EOF
   type = list(object({
