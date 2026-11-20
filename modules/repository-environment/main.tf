@@ -51,7 +51,7 @@ resource "github_repository_environment" "this" {
     for_each = var.deployment_policy.restriction != "NONE" ? ["go"] : []
 
     content {
-      protected_branches     = var.deployment_policy.restriction == "PROTECTED_BRANCHES"
+      protected_branches     = var.deployment_policy.restriction == "PROTECTED_BRANCH"
       custom_branch_policies = var.deployment_policy.restriction == "CUSTOM"
     }
   }
