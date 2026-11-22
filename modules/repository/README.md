@@ -93,9 +93,9 @@ This module creates following resources.
 | <a name="output_default_branch"></a> [default\_branch](#output\_default\_branch) | The default branch of the repository. |
 | <a name="output_deploy_keys"></a> [deploy\_keys](#output\_deploy\_keys) | A map of deploy keys granted access to the repository. |
 | <a name="output_description"></a> [description](#output\_description) | The description of the repository. |
-| <a name="output_environments"></a> [environments](#output\_environments) | The repository's GitHub Pages configuration. |
+| <a name="output_environments"></a> [environments](#output\_environments) | The environments of the repository. |
 | <a name="output_features"></a> [features](#output\_features) | A list of available features on the repository. |
-| <a name="output_files"></a> [files](#output\_files) | A list of files created in the repository. |
+| <a name="output_files"></a> [files](#output\_files) | A map of files created in the repository. |
 | <a name="output_full_name"></a> [full\_name](#output\_full\_name) | The full name of the repository. A string of the form `orgname/reponame` |
 | <a name="output_git_clone_url"></a> [git\_clone\_url](#output\_git\_clone\_url) | The URL that can be provided to `git clone` to clone the repository anonymously via the git protocol. |
 | <a name="output_homepage"></a> [homepage](#output\_homepage) | A URL of the website for the repository. |

@@ -37,7 +37,7 @@ output "default" {
 }
 
 output "editable_by" {
-  description = "The configuration for deployment policy of the environment."
+  description = "Who can edit the values of the custom property."
   value       = upper(github_organization_custom_properties.this.values_editable_by)
 }
 

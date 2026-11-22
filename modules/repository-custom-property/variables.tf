@@ -12,7 +12,7 @@ variable "description" {
 }
 
 variable "type" {
-  description = "(Required) The type of the custom property. Can be one of `STRING`, `SINGLE_SELECT`, `MULTI_SELECT`, or `BOOL`. Defaults to `STRING`."
+  description = "(Optional) The type of the custom property. Can be one of `STRING`, `SINGLE_SELECT`, `MULTI_SELECT`, or `BOOL`. Defaults to `STRING`."
   type        = string
   default     = "STRING"
   nullable    = false
