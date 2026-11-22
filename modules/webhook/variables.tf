@@ -41,7 +41,7 @@ variable "events" {
 }
 
 variable "enabled" {
-  description = "(Optional) Whether to activate the webhook should receive events."
+  description = "(Optional) Whether the webhook is active and should receive events."
   type        = bool
   default     = true
 }

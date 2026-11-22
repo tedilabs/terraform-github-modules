@@ -50,7 +50,7 @@ variable "archive_on_destroy" {
 # INFO: https://github.com/github/choosealicense.com/tree/gh-pages/_licenses
 variable "template" {
   description = <<EOF
-  (Optional) Use a template repository, license or gitignore to create the repository.this resource. `template` block as defined below.
+  (Optional) Use a template repository, license or gitignore to create the repository. `template` block as defined below.
     (Optional) `gitignore` - Choose which files not to track from a list of templates. Use the name of the template without the extension. For example, `Haskell`.
     (Optional) `init_readme` - Whether to produce an initial commit with README.md in the repository. Defaults to `false`.
     (Optional) `license` - A license tells others what they can and can't do with your code. Use the name of the license template without the extension. For example, `mit` or `mpl-2.0`.
