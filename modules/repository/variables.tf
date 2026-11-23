@@ -283,7 +283,7 @@ variable "files" {
       (Required) `path` - The path of the file to manage.
       (Required) `content` - The file content.
     (Optional) `commit` - A `commit` block as defined below.
-      (Optional) `author` - Committer author name to use. NOTE: GitHub app users may omit author and email information so GitHub can verify commits as the GitHub App. This maybe useful when a branch protection rule requires signed commits.
+      (Optional) `author` - Committer author name to use. NOTE: GitHub app users may omit author and email information so GitHub can verify commits as the GitHub App. This may be useful when a branch protection rule requires signed commits.
       (Optional) `email` - Committer email address to use. NOTE: GitHub app users may omit author and email information so GitHub can verify commits as the GitHub App. This may be useful when a branch protection rule requires signed commits.
       (Optional) `message` - The commit message when creating, updating or deleting the managed file. Defaults to `chore: managed by Terraform.`.
     (Optional) `overwrite_on_create` - Enable overwriting existing files. If set to true it will overwrite an existing file with the same name. If set to false it will fail if there is an existing file with the same name. Defaults to `true`.

@@ -64,7 +64,7 @@ resource "github_organization_block" "this" {
 
 
 ###################################################
-# Seucrity Manager Teams for GitHub Organization
+# Security Manager Teams for GitHub Organization
 ###################################################
 
 resource "github_organization_security_manager" "this" {
