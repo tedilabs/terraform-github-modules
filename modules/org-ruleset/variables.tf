@@ -120,7 +120,7 @@ variable "rules" {
       (Required) `workflows` - A list of workflows that must pass. Each item of `workflows` block as defined below.
         (Required) `repository_id` - The ID of the repository where the workflow is defined.
         (Required) `path` - The path to the workflow file (e.g., `.github/workflows/scan.yaml`).
-        (Optional) `ref` - The ref of the workflow file. Defaults to the repository's default branch.
+        (Optional) `ref` - The ref (branch or tag) of the workflow file. Defaults to `master`.
       (Optional) `do_not_enforce_on_create` - Whether to skip enforcing the workflows when a matching ref is created. Defaults to `false`.
     (Optional) `required_code_scanning` - A configuration to require code scanning results before merging. `required_code_scanning` block as defined below.
       (Required) `tools` - A list of code scanning tools that must run. Each item of `tools` block as defined below.
