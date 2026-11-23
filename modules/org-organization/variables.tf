@@ -16,6 +16,11 @@ variable "members" {
   type        = set(string)
   default     = []
   nullable    = false
+
+  validation {
+    condition     = length(setintersection(var.owners, var.members)) == 0
+    error_message = "The same user cannot be both an owner and a member of the organization."
+  }
 }
 
 variable "blocked_users" {
