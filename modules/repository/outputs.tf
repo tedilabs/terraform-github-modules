@@ -157,7 +157,7 @@ output "custom_properties" {
 }
 
 output "files" {
-  description = "A list of files created in the repository."
+  description = "A map of files created in the repository."
   value = {
     for path, file in github_repository_file.this :
     path => {
@@ -188,6 +188,6 @@ output "pages" {
 }
 
 output "environments" {
-  description = "The repository's GitHub Pages configuration."
+  description = "The environments of the repository."
   value       = module.environment
 }
