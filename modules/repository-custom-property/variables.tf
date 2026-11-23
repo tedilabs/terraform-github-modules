@@ -41,7 +41,7 @@ variable "allowed_values" {
       contains(["SINGLE_SELECT", "MULTI_SELECT"], var.type) && length(var.allowed_values) > 0,
       !contains(["SINGLE_SELECT", "MULTI_SELECT"], var.type),
     ])
-    error_message = "`allowed_values` must be provided and contain at least one value when `type` is `SINGLE_SELECT` or `MULTI_SELECT`. It must be empty when `type` is `STRING` or `BOOL`."
+    error_message = "`allowed_values` must be provided and contain at least one value when `type` is `SINGLE_SELECT` or `MULTI_SELECT`."
   }
 }
 

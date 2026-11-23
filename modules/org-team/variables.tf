@@ -106,6 +106,6 @@ variable "code_review_auto_assignment" {
       var.code_review_auto_assignment.enabled == false,
       var.code_review_auto_assignment.enabled == true && var.code_review_auto_assignment.assignment_count != 0
     ])
-    error_message = "The value of `assignment_count` must be greater than 0 when auto assignment is enabled."
+    error_message = "The value of `assignment_count` must not be `0` when auto assignment is enabled."
   }
 }
