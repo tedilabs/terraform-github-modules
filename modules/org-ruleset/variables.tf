@@ -34,7 +34,7 @@ variable "bypass_list" {
     (Required) `actor` - A configuration for the actor that can bypass the ruleset. `actor` block as defined below.
       (Required) `type` - The type of actor that can bypass the ruleset. Can be one of `RepositoryRole`, `Team`, `Integration`, `OrganizationAdmin`, or `DeployKey`.
       (Optional) `id` - The ID of the actor that can bypass the ruleset. When `type` is `OrganizationAdmin`, this should be `1`. For repository roles, use `2` (maintain), `4` (write), or `5` (admin).
-    (Optional) `mode` - The mode by which the actor can bypass the ruleset. Can be one of `always` or `pull_request`. Defaults to `always`.
+    (Optional) `mode` - The mode by which the actor can bypass the ruleset. Can be one of `always`, `pull_request`, or `exempt`. Defaults to `always`.
   EOF
   type = list(object({
     actor = object({
@@ -57,9 +57,9 @@ variable "bypass_list" {
   validation {
     condition = alltrue([
       for item in var.bypass_list :
-      contains(["always", "pull_request"], item.mode)
+      contains(["always", "pull_request", "exempt"], item.mode)
     ])
-    error_message = "Valid values for `bypass_list.*.mode` are `always` or `pull_request`."
+    error_message = "Valid values for `bypass_list.*.mode` are `always`, `pull_request`, or `exempt`."
   }
 }
 
@@ -225,5 +225,13 @@ variable "rules" {
       if pattern != null
     ])
     error_message = "Valid values for the `operator` of any `*_pattern` rule are `starts_with`, `ends_with`, `contains`, or `regex`."
+  }
+
+  validation {
+    condition = (var.rules.required_status_checks == null
+      ? true
+      : length(var.rules.required_status_checks.checks) > 0
+    )
+    error_message = "`rules.required_status_checks.checks` must contain at least one check when `rules.required_status_checks` is set."
   }
 }

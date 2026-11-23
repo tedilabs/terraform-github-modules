@@ -47,7 +47,7 @@ variable "allowed_values" {
 
 variable "default" {
   description = "(Optional) The default value of the custom property."
-  type        = any
+  type        = string
   default     = null
   nullable    = true
 }
@@ -57,4 +57,9 @@ variable "editable_by" {
   type        = string
   default     = "ORG_ACTORS"
   nullable    = false
+
+  validation {
+    condition     = contains(["ORG_ACTORS", "ORG_AND_REPO_ACTORS"], upper(var.editable_by))
+    error_message = "Valid values for `editable_by` are `ORG_ACTORS` or `ORG_AND_REPO_ACTORS`."
+  }
 }

@@ -31,6 +31,11 @@ variable "repositories" {
   description = "(Optional) A list of repositories to create the webhook for. Create an organization-level webhook if you provide `*`."
   type        = set(string)
   default     = ["*"]
+
+  validation {
+    condition     = length(var.repositories) > 0
+    error_message = "`repositories` must contain at least one repository, or `*` for an organization-level webhook."
+  }
 }
 
 # INFO: https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads

@@ -35,7 +35,7 @@ No modules.
 | ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_name"></a> [name](#input\_name) | (Required) The name of the custom property. | `string` | n/a | yes |
 | <a name="input_allowed_values"></a> [allowed\_values](#input\_allowed\_values) | (Optional) A set of allowed values for the custom property. This is required if the `type` is `SINGLE_SELECT` or `MULTI_SELECT`. | `set(string)` | `[]` | no |
-| <a name="input_default"></a> [default](#input\_default) | (Optional) The default value of the custom property. | `any` | `null` | no |
+| <a name="input_default"></a> [default](#input\_default) | (Optional) The default value of the custom property. | `string` | `null` | no |
 | <a name="input_description"></a> [description](#input\_description) | (Optional) The description of the custom property. | `string` | `""` | no |
 | <a name="input_editable_by"></a> [editable\_by](#input\_editable\_by) | (Optional) Who can edit the values of the custom property. Can be one of `ORG_ACTORS` or `ORG_AND_REPO_ACTORS`. When set to `ORG_ACTORS` (the default), only organization owners can edit the property values on repositories. When set to `ORG_AND_REPO_ACTORS`, both organization owners and repository administrators with the custom properties permission can edit the values. | `string` | `"ORG_ACTORS"` | no |
 | <a name="input_required"></a> [required](#input\_required) | (Optional) Whether the custom property is required. Defaults to `false`. | `bool` | `false` | no |
