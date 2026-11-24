@@ -13,6 +13,7 @@ Terraform package which manage all of things on GitHub.
 - [repository](./modules/repository)
 - [repository-custom-property](./modules/repository-custom-property)
 - [repository-environment](./modules/repository-environment)
+- [repository-ruleset](./modules/repository-ruleset)
 - [webhook](./modules/webhook)
 
 
