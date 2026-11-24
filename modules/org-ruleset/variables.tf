@@ -105,6 +105,9 @@ variable "rules" {
     (Optional) `required_linear_history` - Whether to require a linear commit history, preventing merge commits. Defaults to `false`.
     (Optional) `required_signatures` - Whether to require commits pushed to matching refs to have verified signatures. Defaults to `false`.
     (Optional) `non_fast_forward` - Whether to block force pushes to matching refs. Defaults to `false`.
+    (Optional) `copilot_code_review` - A configuration to automatically request Copilot code reviews. Only valid when `target` is `branch`. Omit or set to `null` to omit this rule; set to `{}` to enable reviews with the default options. `copilot_code_review` block as defined below.
+      (Optional) `review_on_push` - Whether to review each new push to a pull request. Defaults to `false`.
+      (Optional) `review_draft_pull_requests` - Whether to review draft pull requests before they are ready for review. Defaults to `false`.
     (Optional) `pull_request` - A configuration to require a pull request before merging. `pull_request` block as defined below.
       (Optional) `dismiss_stale_reviews_on_push` - Whether to dismiss approving reviews when new commits are pushed. Defaults to `false`.
       (Optional) `require_code_owner_review` - Whether to require review from code owners. Defaults to `false`.
@@ -144,6 +147,11 @@ variable "rules" {
     required_linear_history = optional(bool, false)
     required_signatures     = optional(bool, false)
     non_fast_forward        = optional(bool, false)
+
+    copilot_code_review = optional(object({
+      review_on_push             = optional(bool, false)
+      review_draft_pull_requests = optional(bool, false)
+    }))
 
     pull_request = optional(object({
       dismiss_stale_reviews_on_push     = optional(bool, false)
@@ -225,5 +233,10 @@ variable "rules" {
       if pattern != null
     ])
     error_message = "Valid values for the `operator` of any `*_pattern` rule are `starts_with`, `ends_with`, `contains`, or `regex`."
+  }
+
+  validation {
+    condition     = var.rules.copilot_code_review == null || var.target == "branch"
+    error_message = "The `copilot_code_review` rule is only valid when `target` is `branch`."
   }
 }
