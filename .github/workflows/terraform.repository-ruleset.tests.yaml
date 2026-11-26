@@ -1,0 +1,44 @@
+name: Test - repository Ruleset
+
+
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - modules/repository-ruleset/**
+    - .github/workflows/terraform.repository-ruleset.tests.yaml
+    - .mise/**
+    - VERSION
+  pull_request:
+    paths:
+    - modules/repository-ruleset/**
+    - .github/workflows/terraform.repository-ruleset.tests.yaml
+    - .mise/**
+    - VERSION
+
+
+permissions:
+  contents: read
+
+
+jobs:
+  test:
+    name: Terraform Test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v7
+
+    - name: Set up Terraform
+      uses: tedilabs/github-actions/.github/actions/mise.setup-tools@main
+      with:
+        working_directory: modules/repository-ruleset
+        install_args: terraform
+
+    - name: Test with mocked GitHub
+      working-directory: modules/repository-ruleset
+      run: |
+        terraform init -backend=false -input=false
+        terraform test -no-color
